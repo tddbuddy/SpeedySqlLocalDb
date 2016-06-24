@@ -1,0 +1,4 @@
+**/bin/*
+**/packages/*
+**/obj/*
+source/.vs/SpeedySqlLocalDb/v14/.suo
