@@ -28,7 +28,7 @@ namespace TempLocalDb.TestingFramework.Tests
             var expected = "createDbContextFunc";
             var sut = CreateSpeedyLocalDb();
             //---------------Execute Test ----------------------
-            var result = Assert.Throws<ArgumentException>(() => sut.BootstrapDatabase(connection => null));
+            var result = Assert.Throws<ArgumentException>(() => sut.BootstrapDatabaseForEfMigrations(connection => null));
             //---------------Test Result -----------------------
             Assert.AreEqual(expected, result.Message);
         }
@@ -40,7 +40,7 @@ namespace TempLocalDb.TestingFramework.Tests
             var sut = CreateSpeedyLocalDb();
             //---------------Execute Test ----------------------
             //---------------Test Result -----------------------
-            Assert.DoesNotThrow(() => sut.BootstrapDatabase(connection => new ExampleDbContext(connection)));
+            Assert.DoesNotThrow(() => sut.BootstrapDatabaseForEfMigrations(connection => new ExampleDbContext(connection)));
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace TempLocalDb.TestingFramework.Tests
         {
             //---------------Set up test pack-------------------
             var sut = CreateSpeedyLocalDb();
-            sut.BootstrapDatabase(connection => new ExampleDbContext(connection));
+            sut.BootstrapDatabaseForEfMigrations(connection => new ExampleDbContext(connection));
             //---------------Execute Test ----------------------
             using (var wrapper = sut.CreateTempLocalDbWrapper())
             {

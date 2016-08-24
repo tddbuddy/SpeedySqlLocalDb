@@ -10,24 +10,16 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
     [TestFixture]
     public class AttachmentRepositoryTests
     {
-        // NOTE: The one and only time it is acceptable to use Setup, 
-        // TearDown and class level variables in test is for DB Intergration test
-        // this is for a large performance boost
-        private readonly SpeedySqlLocalDb _testDb = new SpeedySqlLocalDb();
-        
         [TestFixtureSetUp]
         public void Setup()
         {
-            // pass through lamda to create your db context ;)
-            _testDb.BootstrapDatabase(connection => new ExampleDbContext(connection) );
-            // add your own migration logic here if not using EF's
-            // https://github.com/lfreneda/EasyLocalDb - fluent migrator example
+            CreateSpeedySqlLocalDb().BootstrapDatabaseForEfMigrations(CreateDbContext);
         }
 
         [TestFixtureTearDown]
         public void TearDown()
         {
-            _testDb.DetachDatabase();
+            CreateSpeedySqlLocalDb().DetachDatabase();
         }
 
         [Test]
@@ -39,7 +31,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                 .WithContent(CreateRandomByteArray(100))
                 .Build();
 
-            using (var wrapper = _testDb.CreateTempLocalDbWrapper())
+            using (var wrapper = CreateSpeedySqlLocalDb().CreateTempLocalDbWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper.Connection);
                 var createDbContext = CreateDbContext(wrapper.Connection);
@@ -53,7 +45,6 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                 //---------------Test Result -----------------------
                 StringAssert.Contains("An error occurred while updating the entries", exception.Message);
             }
-            
         }
 
         [Test]
@@ -76,7 +67,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                 .WithContent(CreateRandomByteArray(100))
                 .Build();
 
-            using (var wrapper = _testDb.CreateTempLocalDbWrapper())
+            using (var wrapper = CreateSpeedySqlLocalDb().CreateTempLocalDbWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper.Connection);
                 var assertDbContext = CreateDbContext(wrapper.Connection);
@@ -108,7 +99,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                     .WithContent(CreateRandomByteArray(100))
                     .Build();
 
-            using (var wrapper = _testDb.CreateTempLocalDbWrapper())
+            using (var wrapper = CreateSpeedySqlLocalDb().CreateTempLocalDbWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper.Connection);
                 var assertDbContext = CreateDbContext(wrapper.Connection);
@@ -133,7 +124,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                 .WithFileName("A.JPG")
                 .WithContent(CreateRandomByteArray(100))
                 .Build();
-            using (var wrapper = _testDb.CreateTempLocalDbWrapper())
+            using (var wrapper = CreateSpeedySqlLocalDb().CreateTempLocalDbWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper.Connection);
                 var createDbContext = CreateDbContext(wrapper.Connection);
@@ -158,7 +149,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                 .WithId(Guid.NewGuid())
                 .Build();
 
-            using (var wrapper = _testDb.CreateTempLocalDbWrapper())
+            using (var wrapper = CreateSpeedySqlLocalDb().CreateTempLocalDbWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper.Connection);
                 var createDbContext = CreateDbContext(wrapper.Connection);
@@ -182,7 +173,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                     .WithContent(CreateRandomByteArray(100))
                     .Build();
 
-            using (var wrapper = _testDb.CreateTempLocalDbWrapper())
+            using (var wrapper = CreateSpeedySqlLocalDb().CreateTempLocalDbWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper.Connection);
                 var createDbContext = CreateDbContext(wrapper.Connection);
@@ -218,7 +209,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                 .WithContent(CreateRandomByteArray(100))
                 .Build();
 
-            using (var wrapper = _testDb.CreateTempLocalDbWrapper())
+            using (var wrapper = CreateSpeedySqlLocalDb().CreateTempLocalDbWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper.Connection);
                 var createDbContext = CreateDbContext(wrapper.Connection);
@@ -264,7 +255,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                 .WithContent(CreateRandomByteArray(100))
                 .Build();
 
-            using (var wrapper = _testDb.CreateTempLocalDbWrapper())
+            using (var wrapper = CreateSpeedySqlLocalDb().CreateTempLocalDbWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper.Connection);
                 var createDbContext = CreateDbContext(wrapper.Connection);
@@ -308,7 +299,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                     .WithFileName("A.JPG")
                     .WithContent(CreateRandomByteArray(100))
                     .Build();
-            using (var wrapper = _testDb.CreateTempLocalDbWrapper())
+            using (var wrapper = CreateSpeedySqlLocalDb().CreateTempLocalDbWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper.Connection);
                 var attachmentsRepository = CreateRepository(repositoryDbContext);
@@ -319,6 +310,11 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                 StringAssert.Contains("Entities may have been modified or deleted since entities were loaded",
                     exception.Message);
             }
+        }
+
+        private static ISpeedySqlLocalDb CreateSpeedySqlLocalDb()
+        {
+            return new SpeedySqlLocalDb();
         }
 
         private void AssertIsEqual(Attachment expectedAttachment, Attachment actualAttachment)

@@ -4,7 +4,7 @@ using System.Transactions;
 
 namespace TddBuddy.SpeedySqlLocalDb
 {
-    public class SpeedySqlLocalDbWrapper : IDisposable
+    public class SpeedySqlLocalDbWrapper : ISpeedySqlLocalDbWrapper
     {
         public SqlConnection Connection { get; }
         private readonly TransactionScope _scope;

@@ -6,33 +6,26 @@ using System.Transactions;
 
 namespace TddBuddy.SpeedySqlLocalDb
 {
-    public class SpeedySqlLocalDb
+    public class SpeedySqlLocalDb : ISpeedySqlLocalDb
     {
         public string DbPath { get; private set; }
         public string DbLogPath { get; private set; }
 
         private readonly string _dbName;
-        private readonly bool _deleteIfExists;
         private readonly string _localDbName = "(LocalDB)\\MSSQLLocalDb";
         private const string DbDirectory = "Data";
-        
-        public SpeedySqlLocalDb():this(DbTestUtil.GetRandomTestDbNameForTestRun(), false) {}
 
-        public SpeedySqlLocalDb(string dbName) : this(dbName, false) { }
-
-        private SpeedySqlLocalDb(string dbName, bool deleteIfExist)
+        public SpeedySqlLocalDb()
         {
-            if (string.IsNullOrWhiteSpace(dbName)) throw new ArgumentException(nameof(dbName));
-
-            _dbName = dbName;
-            _deleteIfExists = deleteIfExist;
+            _dbName = DbTestUtil.GetRandomTestDbNameForTestRun();
         }
 
-        public void BootstrapDatabase(Func<SqlConnection, DbContext> createDbContextFunc)
-        {
-            var tempLocalDb = new SpeedySqlLocalDb(_dbName);
+        //todo : add second bootstrap to use fluent migrations as Func<DbContext, bool>
 
-            using (var connectionWrapper = tempLocalDb.CreateTempLocalDbWrapper())
+        public void BootstrapDatabaseForEfMigrations(Func<SqlConnection, DbContext> createDbContextFunc)
+        {
+            // todo : as part of the boot strap look for old instances and detach them
+            using (var connectionWrapper = new SpeedySqlLocalDb().CreateTempLocalDbWrapper())
             {
                 var repositoryDbContext = createDbContextFunc(connectionWrapper.Connection);
                 if (repositoryDbContext == null) throw new ArgumentException(nameof(createDbContextFunc));
@@ -42,10 +35,10 @@ namespace TddBuddy.SpeedySqlLocalDb
             }
         }
 
-        public SpeedySqlLocalDbWrapper CreateTempLocalDbWrapper()
+        public ISpeedySqlLocalDbWrapper CreateTempLocalDbWrapper()
         {
-            var tempDBDirectoryPath = Path.GetTempPath();
-            var outputFolder = Path.Combine(tempDBDirectoryPath, DbDirectory);
+            var tempDbDirectoryPath = Path.GetTempPath();
+            var outputFolder = Path.Combine(tempDbDirectoryPath, DbDirectory);
             
             var mdfFilename = _dbName + ".mdf";
             DbPath = Path.Combine(outputFolder, mdfFilename);
@@ -59,16 +52,6 @@ namespace TddBuddy.SpeedySqlLocalDb
             }
 
             return CreateTempLocalDbWrapper(DbPath);
-        }
-
-        private SpeedySqlLocalDbWrapper CreateTempLocalDbWrapper(string dbFileName)
-        {
-            var connectionString =
-                $"Data Source={_localDbName};AttachDBFileName={dbFileName};Initial Catalog={_dbName};Integrated Security=True;";
-            var connection = new SqlConnection(connectionString);
-
-            var transactionScope = new TransactionScope();
-            return new SpeedySqlLocalDbWrapper(connection, transactionScope);
         }
 
         public void DetachDatabase()
@@ -93,7 +76,17 @@ namespace TddBuddy.SpeedySqlLocalDb
                 Console.WriteLine($"Couldn't detatch database {_dbName} - {ex.Message}");
             }
         }
+        
+        private SpeedySqlLocalDbWrapper CreateTempLocalDbWrapper(string dbFileName)
+        {
+            var connectionString =
+                $"Data Source={_localDbName};AttachDBFileName={dbFileName};Initial Catalog={_dbName};Integrated Security=True;";
+            var connection = new SqlConnection(connectionString);
 
+            var transactionScope = new TransactionScope();
+            return new SpeedySqlLocalDbWrapper(connection, transactionScope);
+        }
+        
         private void CreateDatabase(string dbFileName)
         {
             var connectionString = $"Data Source={_localDbName};Initial Catalog=master;Integrated Security=True";
