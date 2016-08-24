@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>SpeedySqlLocalDb</title>
+    <authors>TddBuddy</authors>
+    <owners>TddBuddy</owners>
+    <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
+    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
+    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A super quick localDb testing framework for use with Entity Framework. 
+	It uses a localDB instance for the entire test run's life. 
+	Each test's execution is wrapped into transaction to avoid test interfering with each other. This means the cost of setting up the DB is only paid once. That is when the first test executes and the EF migrations are run to initialize the DB to the correct state.
+This framework was sliced out of from a production project where the test runs where nearing 40 minutes on the CI server. The bulk of the time was take up by 200 repository integration test due to Entity Framework's need to run migrations for each test being executed. This was due to the fact that each test needed its own DB to allow for proper isolation. After implementing the transactional scoping logic the test run time was reduced to 8 minutes. A full 5x speed improvement.</description>
+    <releaseNotes>Inital Release</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>LocalDb EF O/RM .NET Database TDD</tags>
+  </metadata>
+</package>
