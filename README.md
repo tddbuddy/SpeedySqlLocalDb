@@ -6,4 +6,4 @@ This framework was sliced out of from a production project where the test runs w
 
 Check out the source at : https://bitbucket.org/stoneagetechnologies/speedysqllocaldb/src/
 
-Have a look at the **TddBuddy.SpeedySqlLocalDb.EF.Examples/AttachmentRepositoryTests.cs** for example of how to use it.
+Have a look at **TddBuddy.SpeedySqlLocalDb.EF.Examples/AttachmentRepositoryTests.cs** for example of how to use it.
