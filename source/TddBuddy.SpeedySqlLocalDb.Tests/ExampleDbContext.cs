@@ -3,7 +3,6 @@ using System.Data.Entity;
 
 namespace TddBuddy.SpeedySqlLocalDb.Tests
 { 
-
     public class ExampleDbContext : DbContext
     {
         public ExampleDbContext() : base("SomeDbConnectionStringReference")
@@ -14,6 +13,5 @@ namespace TddBuddy.SpeedySqlLocalDb.Tests
         public ExampleDbContext(DbConnection dbConnection) : base(dbConnection, false)
         {
         }
-        
     }
 }

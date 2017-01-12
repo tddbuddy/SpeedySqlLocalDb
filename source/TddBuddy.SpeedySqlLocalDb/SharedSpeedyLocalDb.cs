@@ -27,7 +27,7 @@ namespace TddBuddy.SpeedySqlLocalDb
             _speedyInstance = new SpeedySqlLocalDb(_contextVariables);
             // todo : Clean up existing old DB's
             BootstrapDatabaseForEfMigrations();
-            CleanUpOldDatabases();
+            //CleanUpOldDatabases();
         }
         
         public void Dispose()

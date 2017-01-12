@@ -7,18 +7,20 @@ namespace TddBuddy.SpeedySqlLocalDb
 {
     public class ContextVariables
     {
+        private static string _dbName;
         public string LocalDbName => "(LocalDB)\\MSSQLLocalDb";
         public string Prefix => "SpeedyDb_";
 
         public string DbPath { get; }
         public string DbLogPath { get; }
         public string OutputFolder { get; }
-        public string DbName { get; }
-        
+
+        public string DbName => _dbName;
+
         public ContextVariables()
         {
             var executingAssembly = Assembly.GetExecutingAssembly();
-            DbName = GetRandomTestDbNameForTestRun();
+            _dbName = GetRandomTestDbNameForTestRun();
 
             var tempDbDirectoryPath = Path.GetDirectoryName(executingAssembly.Location) ?? Path.GetTempPath();
             
