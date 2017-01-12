@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Text;
 
 namespace TddBuddy.SpeedySqlLocalDb
@@ -7,23 +8,23 @@ namespace TddBuddy.SpeedySqlLocalDb
     public class ContextVariables
     {
         public string LocalDbName => "(LocalDB)\\MSSQLLocalDb";
+        public string Prefix => "SpeedyDb_";
 
-        public string DbPath { get; private set; }
-        public string DbLogPath { get; private set; }
+        public string DbPath { get; }
+        public string DbLogPath { get; }
         public string OutputFolder { get; }
-
         public string DbName { get; }
-
-
+        
         public ContextVariables()
         {
+            var executingAssembly = Assembly.GetExecutingAssembly();
             DbName = GetRandomTestDbNameForTestRun();
 
-            var mdfFilename = DbName + ".mdf";
-            var tempDbDirectoryPath = Path.GetTempPath();
-
+            var tempDbDirectoryPath = Path.GetDirectoryName(executingAssembly.Location) ?? Path.GetTempPath();
+            
             OutputFolder = Path.Combine(tempDbDirectoryPath, "Data");
-            DbPath = Path.Combine(OutputFolder, mdfFilename);
+
+            DbPath = Path.Combine(OutputFolder, $"{DbName}.mdf");
             DbLogPath = Path.Combine(OutputFolder, $"{DbName}_log.ldf");
         }
 
@@ -33,7 +34,8 @@ namespace TddBuddy.SpeedySqlLocalDb
 
             var dbName = Guid.NewGuid().ToString();
             var plainTextBytes = Encoding.UTF8.GetBytes(dbName);
-            return Convert.ToBase64String(plainTextBytes);
+            var base64PostName = Convert.ToBase64String(plainTextBytes);
+            return $"{Prefix}{base64PostName}";
         }
     }
 }
