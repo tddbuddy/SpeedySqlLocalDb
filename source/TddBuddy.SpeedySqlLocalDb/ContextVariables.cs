@@ -21,6 +21,7 @@ namespace TddBuddy.SpeedySqlLocalDb
 
             var mdfFilename = DbName + ".mdf";
             var tempDbDirectoryPath = Path.GetTempPath();
+
             OutputFolder = Path.Combine(tempDbDirectoryPath, "Data");
             DbPath = Path.Combine(OutputFolder, mdfFilename);
             DbLogPath = Path.Combine(OutputFolder, $"{DbName}_log.ldf");
