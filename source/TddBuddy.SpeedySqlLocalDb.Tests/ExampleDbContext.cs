@@ -1,7 +1,7 @@
 using System.Data.Common;
 using System.Data.Entity;
 
-namespace TddBuddy.SpeedySqlLocalDb.Test
+namespace TddBuddy.SpeedySqlLocalDb.Tests
 { 
 
     public class ExampleDbContext : DbContext

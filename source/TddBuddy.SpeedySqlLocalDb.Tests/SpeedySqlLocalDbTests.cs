@@ -1,10 +1,7 @@
-﻿using NUnit.Framework;
-using System;
-using System.IO;
-using TddBuddy.SpeedySqlLocalDb;
-using TddBuddy.SpeedySqlLocalDb.Test;
+﻿using System;
+using NUnit.Framework;
 
-namespace TempLocalDb.TestingFramework.Tests
+namespace TddBuddy.SpeedySqlLocalDb.Tests
 {
     [TestFixture]
     public class SpeedyTestLocalDb
