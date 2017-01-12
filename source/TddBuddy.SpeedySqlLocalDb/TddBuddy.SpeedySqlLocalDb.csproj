@@ -51,11 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbTestUtil.cs" />
+    <Compile Include="ContextVariables.cs" />
     <Compile Include="ISpeedyLocalDbWrapper.cs" />
     <Compile Include="ISpeedySqlLocalDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SharedSpeedyLocalDb.cs" />
+    <Compile Include="SpeedySqlFactory.cs" />
     <Compile Include="SpeedySqlLocalDb.cs" />
     <Compile Include="SpeedySqlLocalDbWrapper.cs" />
   </ItemGroup>

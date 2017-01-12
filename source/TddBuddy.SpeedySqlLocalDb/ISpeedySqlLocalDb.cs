@@ -6,8 +6,8 @@ namespace TddBuddy.SpeedySqlLocalDb
 {
     public interface ISpeedySqlLocalDb
     {
-        void BootstrapDatabaseForEfMigrations(Func<SqlConnection, DbContext> createDbContextFunc);
-        ISpeedySqlLocalDbWrapper CreateTempLocalDbWrapper();
-        void DetachDatabase();
+        //void BootstrapDatabaseForEfMigrations(Func<SqlConnection, DbContext> createDbContextFunc);
+        ISpeedySqlLocalDbWrapper CreateSpeedyLocalDbWrapper();
+        //void DetachDatabase();
     }
 }

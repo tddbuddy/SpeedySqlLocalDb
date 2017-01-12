@@ -1,6 +1,5 @@
 using System;
 using System.Data.Common;
-using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using NUnit.Framework;
@@ -21,7 +20,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                 .WithContent(CreateRandomByteArray(100))
                 .Build();
 
-            using (var wrapper = CreateSpeedySqlLocalDb().CreateTempLocalDbWrapper())
+            using (var wrapper = new SpeedySqlFactory().CreateWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper.Connection);
                 var createDbContext = CreateDbContext(wrapper.Connection);
@@ -57,7 +56,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                 .WithContent(CreateRandomByteArray(100))
                 .Build();
 
-            using (var wrapper = CreateSpeedySqlLocalDb().CreateTempLocalDbWrapper())
+            using (var wrapper = new SpeedySqlFactory().CreateWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper.Connection);
                 var assertDbContext = CreateDbContext(wrapper.Connection);
@@ -89,7 +88,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                     .WithContent(CreateRandomByteArray(100))
                     .Build();
 
-            using (var wrapper = CreateSpeedySqlLocalDb().CreateTempLocalDbWrapper())
+            using (var wrapper = new SpeedySqlFactory().CreateWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper.Connection);
                 var assertDbContext = CreateDbContext(wrapper.Connection);
@@ -114,7 +113,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                 .WithFileName("A.JPG")
                 .WithContent(CreateRandomByteArray(100))
                 .Build();
-            using (var wrapper = CreateSpeedySqlLocalDb().CreateTempLocalDbWrapper())
+            using (var wrapper = new SpeedySqlFactory().CreateWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper.Connection);
                 var createDbContext = CreateDbContext(wrapper.Connection);
@@ -139,7 +138,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                 .WithId(Guid.NewGuid())
                 .Build();
 
-            using (var wrapper = CreateSpeedySqlLocalDb().CreateTempLocalDbWrapper())
+            using (var wrapper = new SpeedySqlFactory().CreateWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper.Connection);
                 var createDbContext = CreateDbContext(wrapper.Connection);
@@ -163,7 +162,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                     .WithContent(CreateRandomByteArray(100))
                     .Build();
 
-            using (var wrapper = CreateSpeedySqlLocalDb().CreateTempLocalDbWrapper())
+            using (var wrapper = new SpeedySqlFactory().CreateWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper.Connection);
                 var createDbContext = CreateDbContext(wrapper.Connection);
@@ -199,7 +198,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                 .WithContent(CreateRandomByteArray(100))
                 .Build();
 
-            using (var wrapper = CreateSpeedySqlLocalDb().CreateTempLocalDbWrapper())
+            using (var wrapper = new SpeedySqlFactory().CreateWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper.Connection);
                 var createDbContext = CreateDbContext(wrapper.Connection);
@@ -245,7 +244,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                 .WithContent(CreateRandomByteArray(100))
                 .Build();
 
-            using (var wrapper = CreateSpeedySqlLocalDb().CreateTempLocalDbWrapper())
+            using (var wrapper = new SpeedySqlFactory().CreateWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper.Connection);
                 var createDbContext = CreateDbContext(wrapper.Connection);
@@ -289,7 +288,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                     .WithFileName("A.JPG")
                     .WithContent(CreateRandomByteArray(100))
                     .Build();
-            using (var wrapper = CreateSpeedySqlLocalDb().CreateTempLocalDbWrapper())
+            using (var wrapper = new SpeedySqlFactory().CreateWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper.Connection);
                 var attachmentsRepository = CreateRepository(repositoryDbContext);
@@ -300,11 +299,6 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                 StringAssert.Contains("Entities may have been modified or deleted since entities were loaded",
                     exception.Message);
             }
-        }
-
-        private static ISpeedySqlLocalDb CreateSpeedySqlLocalDb()
-        {
-            return new SpeedySqlLocalDb();
         }
 
         private void AssertIsEqual(Attachment expectedAttachment, Attachment actualAttachment)

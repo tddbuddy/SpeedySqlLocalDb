@@ -72,7 +72,6 @@
   <ItemGroup>
     <Compile Include="ExampleDbContext.cs" />
     <Compile Include="SharedSpeedyLocalDbTests.cs" />
-    <Compile Include="SpeedySqlLocalDbTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
