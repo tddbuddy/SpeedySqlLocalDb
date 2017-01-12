@@ -1,5 +1,6 @@
 using System;
 using System.Data.Common;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using NUnit.Framework;
@@ -8,20 +9,9 @@ using TddBuddy.SpeedySqlLocalDb.EF.Examples.ExampleDb;
 namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
 {
     [TestFixture]
-    public class AttachmentRepositoryTests
+    [SharedSpeedyLocalDb(typeof(ExampleDbContext))]
+    public class AttachmentRepositoryTests 
     {
-        [TestFixtureSetUp]
-        public void Setup()
-        {
-            CreateSpeedySqlLocalDb().BootstrapDatabaseForEfMigrations(CreateDbContext);
-        }
-
-        [TestFixtureTearDown]
-        public void TearDown()
-        {
-            CreateSpeedySqlLocalDb().DetachDatabase();
-        }
-
         [Test]
         public void Create_GivenExistingAttachment_ShouldThrowExceptionWhenSaving()
         {
@@ -340,4 +330,5 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
             return bytes;
         }
     }
+
 }
