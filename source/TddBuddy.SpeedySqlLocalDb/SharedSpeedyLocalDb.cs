@@ -67,9 +67,10 @@ namespace TddBuddy.SpeedySqlLocalDb
                         cmd.CommandText = cleanCmd.ToString();
                         cmd.ExecuteNonQuery();
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
-                        // fail sliently. could be a pathing issue to DB or other sillyness
+                        // could be a pathing issue to DB or other sillyness
+                        Console.Write($"Failed attempting to clean up old connections - {e.Message}");
                     }
                 }
             }
