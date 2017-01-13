@@ -6,9 +6,6 @@ using System.Text;
 
 namespace TddBuddy.SpeedySqlLocalDb
 {
-    // https://github.com/fluffynuts/PeanutButter/blob/master/source/TempDb/PeanutButter.TempDb.LocalDb/TempDBLocalDb.cs
-    // https://github.com/fluffynuts/PeanutButter/blob/master/source/TempDb/PeanutButter.TempDb.Tests/TestTempDBLocalDb.cs
-
     public class SharedSpeedyLocalDb : Attribute, IDisposable
     {        
         private readonly Type _dbContextType;
@@ -70,9 +67,9 @@ namespace TddBuddy.SpeedySqlLocalDb
                         cmd.CommandText = cleanCmd.ToString();
                         cmd.ExecuteNonQuery();
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
-                        // fail sliently
+                        // fail sliently. could be a pathing issue to DB or other sillyness
                     }
                 }
             }
@@ -80,7 +77,6 @@ namespace TddBuddy.SpeedySqlLocalDb
 
         private void BootstrapDatabaseForEfMigrations()
         {
-            // todo : as part of the boot strap look for old instances and detach them
             using (var connectionWrapper = _speedyInstance.CreateSpeedyLocalDbWrapper())
             {
                 var repositoryDbContext = CreateDbContext(connectionWrapper.Connection);
