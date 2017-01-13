@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TddBuddy.SpeedySqlLocalDb
 {
-    public class SharedSpeedyLocalDb : Attribute, IDisposable
+    public sealed class SharedSpeedyLocalDb : Attribute, IDisposable
     {        
         private readonly Type _dbContextType;
         private readonly ISpeedySqlLocalDb _speedyInstance;
