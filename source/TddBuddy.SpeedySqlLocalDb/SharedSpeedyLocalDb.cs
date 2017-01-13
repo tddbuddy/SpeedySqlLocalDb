@@ -25,9 +25,8 @@ namespace TddBuddy.SpeedySqlLocalDb
             _dbContextType = dbContextType;
             _contextVariables = new ContextVariables();
             _speedyInstance = new SpeedySqlLocalDb(_contextVariables);
-            // todo : Clean up existing old DB's
             BootstrapDatabaseForEfMigrations();
-            //CleanUpOldDatabases();
+            CleanUpOldDatabases();
         }
         
         public void Dispose()
@@ -41,13 +40,11 @@ namespace TddBuddy.SpeedySqlLocalDb
         }
 
         // todo : TEST THIS
-        // todo : I need a completely differnt instance to execute this command with
         private void CleanUpOldDatabases()
         {
-            // C:\Users\travis-pc\AppData\Local\Microsoft\Microsoft SQL Server Local DB\Instances\MSSQLLocalDb\master.mdf
-            // or pack in a tiny maintance db for this purpose. Manifest extraction is quite easy
-            var connectionString =
-                $"Data Source={_contextVariables.LocalDbName};AttachDBFileName=\"%AppData%Local\\Microsoft\\Microsoft SQL Server Local DB\\Instances\\MSSQLLocalDb\\master.mdf\";Initial Catalog=master;Integrated Security=True;";
+            var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var masterLocalDb = @"Microsoft\Microsoft SQL Server Local DB\Instances\MSSQLLocalDb\master.mdf";
+            var connectionString = $"Data Source={_contextVariables.LocalDbName};AttachDBFileName={appDataPath}\\{masterLocalDb};Initial Catalog=master;Integrated Security=True;";
             using (var connection = new SqlConnection(connectionString))
             {
                 var cleanCmd = new StringBuilder();
@@ -58,14 +55,25 @@ namespace TddBuddy.SpeedySqlLocalDb
                 cleanCmd.AppendLine("begin");
                 cleanCmd.AppendLine("select top 1 @cmd = cmd from @tmp;");
                 cleanCmd.AppendLine("delete from @tmp where cmd = @cmd;");
+                cleanCmd.AppendLine("begin try");
                 cleanCmd.AppendLine("exec(@cmd);");
-                cleanCmd.AppendLine("end;");
+                cleanCmd.AppendLine("end try");
+                cleanCmd.AppendLine("begin catch");
+                cleanCmd.AppendLine("end catch");
+                cleanCmd.AppendLine("end");
 
                 using (var cmd = connection.CreateCommand())
                 {
-                    connection.Open();
-                    cmd.CommandText = cleanCmd.ToString();
-                    cmd.ExecuteNonQuery();
+                    try
+                    {
+                        connection.Open();
+                        cmd.CommandText = cleanCmd.ToString();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+                        // fail sliently
+                    }
                 }
             }
         }

@@ -7,7 +7,6 @@ namespace TddBuddy.SpeedySqlLocalDb
 {
     public class ContextVariables
     {
-        private static string _dbName;
         public string LocalDbName => "(LocalDB)\\MSSQLLocalDb";
         public string Prefix => "SpeedyDb_";
 
@@ -16,6 +15,7 @@ namespace TddBuddy.SpeedySqlLocalDb
         public string OutputFolder { get; }
 
         public string DbName => _dbName;
+        private static string _dbName;
 
         public ContextVariables()
         {
