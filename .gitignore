@@ -2,4 +2,5 @@
 **/packages/*
 **/obj/*
 source/.vs/SpeedySqlLocalDb/v14/.suo
-source/TestResults/*.coverage
+**/*.coverage
+**/*.nupkg
