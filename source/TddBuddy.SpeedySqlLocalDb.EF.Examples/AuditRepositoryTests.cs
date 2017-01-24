@@ -10,7 +10,6 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
     [SharedSpeedyLocalDb(typeof(AuditingDbContext), typeof(DateTimeProvider))]
     public class AuditRepositoryTests
     {
-
         [Test]
         public void Create_GivenAuditEntry_ShouldStoreInDatabase()
         {
