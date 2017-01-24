@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Entity;
 using System.Data.SqlClient;
@@ -9,10 +10,15 @@ namespace TddBuddy.SpeedySqlLocalDb
     public sealed class SharedSpeedyLocalDb : Attribute, IDisposable
     {        
         private readonly Type _dbContextType;
+        private readonly Type[] _dbContextTypeArgs;
         private readonly ISpeedySqlLocalDb _speedyInstance;
         private readonly ContextVariables _contextVariables;
 
-        public SharedSpeedyLocalDb(Type dbContextType)
+        public SharedSpeedyLocalDb(Type dbContextType) : this(dbContextType, new Type[0])
+        {
+        }
+
+        public SharedSpeedyLocalDb(Type dbContextType, params Type[] dbContextTypeArgs)
         {
             if (!dbContextType.IsSubclassOf(typeof(DbContext)))
             {
@@ -20,12 +26,13 @@ namespace TddBuddy.SpeedySqlLocalDb
             }
 
             _dbContextType = dbContextType;
+            _dbContextTypeArgs = dbContextTypeArgs;
             _contextVariables = new ContextVariables();
             _speedyInstance = new SpeedySqlLocalDb(_contextVariables);
             BootstrapDatabaseForEfMigrations();
             CleanUpOldDatabases();
         }
-        
+
         public void Dispose()
         {
             DetachDatabase();
@@ -33,7 +40,28 @@ namespace TddBuddy.SpeedySqlLocalDb
         
         private DbContext CreateDbContext(DbConnection connection)
         {
-            return (DbContext)Activator.CreateInstance(_dbContextType, connection);
+            // todo : if _dbContextTypeArgs not null use them to make instance
+            if (_dbContextTypeArgs.Length == 0)
+            {
+                return (DbContext) Activator.CreateInstance(_dbContextType, connection);
+            }
+
+            return BuildDbContextWithArguments(connection);
+        }
+
+        private DbContext BuildDbContextWithArguments(DbConnection connection)
+        {
+            var argValues = new List<object>
+            {
+                connection
+            };
+
+            foreach (var value in _dbContextTypeArgs)
+            {
+                argValues.Add(Activator.CreateInstance(value));
+            }
+
+            return (DbContext) Activator.CreateInstance(_dbContextType, argValues.ToArray());
         }
 
         // todo : TEST THIS

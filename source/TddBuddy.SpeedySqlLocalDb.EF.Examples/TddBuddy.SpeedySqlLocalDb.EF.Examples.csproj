@@ -72,12 +72,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExampleDb\AuditRepository.cs" />
+    <Compile Include="AuditRepositoryTests.cs" />
+    <Compile Include="ExampleDb\AuditEntry.cs" />
+    <Compile Include="ExampleDb\DateTimeProvider.cs" />
     <Compile Include="ExampleDb\Attachment.cs" />
     <Compile Include="ExampleDb\AttachmentBuilder.cs" />
     <Compile Include="ExampleDb\AttachmentRepository.cs" />
     <Compile Include="AttachmentRepositoryTests.cs" />
-    <Compile Include="ExampleDb\ExampleDbContext.cs" />
+    <Compile Include="ExampleDb\AttachmentDbContext.cs" />
+    <Compile Include="ExampleDb\AuditingDbContext.cs" />
     <Compile Include="ExampleDb\IAttachmentRepository.cs" />
+    <Compile Include="ExampleDb\IDateTimeProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

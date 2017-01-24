@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using TddBuddy.SpeedySqlLocalDb.EF.Examples.ExampleDb;
 
 namespace TddBuddy.SpeedySqlLocalDb.Tests
 {
@@ -12,7 +13,7 @@ namespace TddBuddy.SpeedySqlLocalDb.Tests
             //---------------Set up test pack-------------------
             //---------------Execute Test ----------------------
             //---------------Test Result -----------------------
-            Assert.DoesNotThrow(() => new SharedSpeedyLocalDb(typeof(ExampleDbContext)));
+            Assert.DoesNotThrow(() => new SharedSpeedyLocalDb(typeof(AttachmentDbContext)));
         }
 
         [Test]

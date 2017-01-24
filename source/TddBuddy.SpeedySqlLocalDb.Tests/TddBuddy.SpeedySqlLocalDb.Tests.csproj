@@ -78,6 +78,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TddBuddy.SpeedySqlLocalDb.EF.Examples\TddBuddy.SpeedySqlLocalDb.EF.Examples.csproj">
+      <Project>{4F326C8A-D2A5-4DE1-B292-2D0AB05D6BAA}</Project>
+      <Name>TddBuddy.SpeedySqlLocalDb.EF.Examples</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TddBuddy.SpeedySqlLocalDb\TddBuddy.SpeedySqlLocalDb.csproj">
       <Project>{c4e7fd71-2eac-491f-b2a4-ae01008eef06}</Project>
       <Name>TddBuddy.SpeedySqlLocalDb</Name>

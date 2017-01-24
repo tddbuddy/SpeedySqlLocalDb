@@ -8,9 +8,33 @@ using TddBuddy.SpeedySqlLocalDb.EF.Examples.ExampleDb;
 namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
 {
     [TestFixture]
-    [SharedSpeedyLocalDb(typeof(ExampleDbContext))]
+    [SharedSpeedyLocalDb(typeof(AttachmentDbContext))]
     public class AttachmentRepositoryTests 
     {
+        [Test]
+        public void Create_GivenOneAttachment_ShouldStoreInDatabase()
+        {
+            //---------------Set up test pack-------------------
+            var attachment = new AttachmentBuilder()
+                    .WithFileName("A.JPG")
+                    .WithContent(CreateRandomByteArray(100))
+                    .Build();
+
+            using (var wrapper = new SpeedySqlFactory().CreateWrapper())
+            {
+                var repositoryDbContext = CreateDbContext(wrapper.Connection);
+                var assertDbContext = CreateDbContext(wrapper.Connection);
+                var attachmentsRepository = CreateRepository(repositoryDbContext);
+                //---------------Execute Test ----------------------
+                attachmentsRepository.Create(attachment);
+                attachmentsRepository.Save();
+                //---------------Test Result -----------------------
+                Assert.AreEqual(1, assertDbContext.Attachments.Count());
+                var actualAttachment = assertDbContext.Attachments.First();
+                AssertIsEqual(attachment, actualAttachment);
+            }
+        }
+
         [Test]
         public void Create_GivenExistingAttachment_ShouldThrowExceptionWhenSaving()
         {
@@ -78,31 +102,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
             }
 
         }
-
-        [Test]
-        public void Create_GivenOneAttachment_ShouldStoreInDatabase()
-        {
-            //---------------Set up test pack-------------------
-            var attachment = new AttachmentBuilder()
-                    .WithFileName("A.JPG")
-                    .WithContent(CreateRandomByteArray(100))
-                    .Build();
-
-            using (var wrapper = new SpeedySqlFactory().CreateWrapper())
-            {
-                var repositoryDbContext = CreateDbContext(wrapper.Connection);
-                var assertDbContext = CreateDbContext(wrapper.Connection);
-                var attachmentsRepository = CreateRepository(repositoryDbContext);
-                //---------------Execute Test ----------------------
-                attachmentsRepository.Create(attachment);
-                attachmentsRepository.Save();
-                //---------------Test Result -----------------------
-                Assert.AreEqual(1, assertDbContext.Attachments.Count());
-                var actualAttachment = assertDbContext.Attachments.First();
-                AssertIsEqual(attachment, actualAttachment);
-            }
-        }
-
+        
         [Test]
         public void Find_GivenExistingAttachment_ShouldReturnAttachment()
         {
@@ -307,14 +307,14 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
             Assert.AreEqual(expectedAttachment.FileName, actualAttachment.FileName);
         }
 
-        private AttachmentRepository CreateRepository(ExampleDbContext writeDbContext)
+        private AttachmentRepository CreateRepository(AttachmentDbContext writeDbContext)
         {
             return new AttachmentRepository(writeDbContext);
         }
 
-        private ExampleDbContext CreateDbContext(DbConnection connection)
+        private AttachmentDbContext CreateDbContext(DbConnection connection)
         {
-            return new ExampleDbContext(connection);
+            return new AttachmentDbContext(connection);
         }
 
         private static byte[] CreateRandomByteArray(int size)

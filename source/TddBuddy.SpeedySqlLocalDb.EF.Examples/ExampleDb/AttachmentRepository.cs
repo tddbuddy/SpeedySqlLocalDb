@@ -7,9 +7,9 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.ExampleDb
 {
     public class AttachmentRepository : IAttachmentRepository
     {
-        private readonly ExampleDbContext _dbContext;
+        private readonly AttachmentDbContext _dbContext;
 
-        public AttachmentRepository(ExampleDbContext dbContext)
+        public AttachmentRepository(AttachmentDbContext dbContext)
         {
             _dbContext = dbContext;
         }
