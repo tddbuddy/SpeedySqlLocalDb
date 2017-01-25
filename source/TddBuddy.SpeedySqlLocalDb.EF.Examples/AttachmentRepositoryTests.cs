@@ -3,6 +3,7 @@ using System.Data.Common;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using NUnit.Framework;
+using TddBuddy.SpeedySqlLocalDb.Attribute;
 using TddBuddy.SpeedySqlLocalDb.EF.Examples.ExampleDb;
 
 namespace TddBuddy.SpeedySqlLocalDb.EF.Examples

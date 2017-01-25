@@ -2,6 +2,8 @@
 using System.Data.Common;
 using System.Linq;
 using NUnit.Framework;
+using TddBuddy.SpeedySqlLocalDb.Attribute;
+using TddBuddy.SpeedySqlLocalDb.Construction;
 using TddBuddy.SpeedySqlLocalDb.EF.Examples.ExampleDb;
 
 namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
@@ -22,7 +24,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                 LogDetail = "Bar One"
             };
 
-            using (var wrapper = new SpeedySqlFactory().CreateWrapper())
+            using (var wrapper = CreateWrapper())
             {
                 var repositoryDbContext = CreateDbContext(wrapper.Connection);
                 var assertDbContext = CreateDbContext(wrapper.Connection);
@@ -35,6 +37,13 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
                 var actualEntry = assertDbContext.AuditEntries.First();
                 AssertIsEqual(entry, actualEntry);
             }
+        }
+
+        private ISpeedySqlLocalDbWrapper CreateWrapper()
+        {
+            return new SpeedySqlBuilder()
+                       .WithTransactionTimeout(5)
+                       .BuildWrapper();
         }
 
         private void AssertIsEqual(AuditEntry expectedAttachment, AuditEntry actualAttachment)

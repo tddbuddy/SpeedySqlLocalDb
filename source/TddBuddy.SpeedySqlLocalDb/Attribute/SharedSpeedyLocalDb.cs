@@ -5,9 +5,9 @@ using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Text;
 
-namespace TddBuddy.SpeedySqlLocalDb
+namespace TddBuddy.SpeedySqlLocalDb.Attribute
 {
-    public sealed class SharedSpeedyLocalDb : Attribute, IDisposable
+    public sealed class SharedSpeedyLocalDb : System.Attribute, IDisposable
     {        
         private readonly Type _dbContextType;
         private readonly Type[] _dbContextTypeArgs;
@@ -72,27 +72,14 @@ namespace TddBuddy.SpeedySqlLocalDb
             var connectionString = $"Data Source={_contextVariables.LocalDbName};AttachDBFileName={appDataPath}\\{masterLocalDb};Initial Catalog=master;Integrated Security=True;";
             using (var connection = new SqlConnection(connectionString))
             {
-                var cleanCmd = new StringBuilder();
-                cleanCmd.AppendLine("declare @tmp table(cmd nvarchar(1024));");
-                cleanCmd.AppendLine($"insert into @tmp(cmd) select 'drop database ' + name from sys.databases where name like '{_contextVariables.Prefix}%' and is_cleanly_shutdown = 1;");
-                cleanCmd.AppendLine("declare @cmd nvarchar(1024);");
-                cleanCmd.AppendLine("while exists(select * from @tmp)");
-                cleanCmd.AppendLine("begin");
-                cleanCmd.AppendLine("select top 1 @cmd = cmd from @tmp;");
-                cleanCmd.AppendLine("delete from @tmp where cmd = @cmd;");
-                cleanCmd.AppendLine("begin try");
-                cleanCmd.AppendLine("exec(@cmd);");
-                cleanCmd.AppendLine("end try");
-                cleanCmd.AppendLine("begin catch");
-                cleanCmd.AppendLine("end catch");
-                cleanCmd.AppendLine("end");
+                var cleanCmd = CreateCleanupCommand();
 
                 using (var cmd = connection.CreateCommand())
                 {
                     try
                     {
                         connection.Open();
-                        cmd.CommandText = cleanCmd.ToString();
+                        cmd.CommandText = cleanCmd;
                         cmd.ExecuteNonQuery();
                     }
                     catch (Exception e)
@@ -102,6 +89,26 @@ namespace TddBuddy.SpeedySqlLocalDb
                     }
                 }
             }
+        }
+
+        private string CreateCleanupCommand()
+        {
+            var cleanCmd = new StringBuilder();
+            cleanCmd.AppendLine("declare @tmp table(cmd nvarchar(1024));");
+            cleanCmd.AppendLine(
+                $"insert into @tmp(cmd) select 'drop database ' + name from sys.databases where name like '{_contextVariables.Prefix}%' and is_cleanly_shutdown = 1;");
+            cleanCmd.AppendLine("declare @cmd nvarchar(1024);");
+            cleanCmd.AppendLine("while exists(select * from @tmp)");
+            cleanCmd.AppendLine("begin");
+            cleanCmd.AppendLine("select top 1 @cmd = cmd from @tmp;");
+            cleanCmd.AppendLine("delete from @tmp where cmd = @cmd;");
+            cleanCmd.AppendLine("begin try");
+            cleanCmd.AppendLine("exec(@cmd);");
+            cleanCmd.AppendLine("end try");
+            cleanCmd.AppendLine("begin catch");
+            cleanCmd.AppendLine("end catch");
+            cleanCmd.AppendLine("end");
+            return cleanCmd.ToString();
         }
 
         private void BootstrapDatabaseForEfMigrations()

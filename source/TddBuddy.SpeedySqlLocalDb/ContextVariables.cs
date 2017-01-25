@@ -13,9 +13,11 @@ namespace TddBuddy.SpeedySqlLocalDb
         public string DbPath { get; }
         public string DbLogPath { get; }
         public string OutputFolder { get; }
-
+        
         public string DbName => _dbName;
         private static string _dbName;
+
+        public int TransactionTimeoutMinutes { get; set; }
 
         public ContextVariables()
         {
@@ -28,6 +30,8 @@ namespace TddBuddy.SpeedySqlLocalDb
 
             DbPath = Path.Combine(OutputFolder, $"{DbName}.mdf");
             DbLogPath = Path.Combine(OutputFolder, $"{DbName}_log.ldf");
+
+            TransactionTimeoutMinutes = 1;
         }
 
         private string GetRandomTestDbNameForTestRun()

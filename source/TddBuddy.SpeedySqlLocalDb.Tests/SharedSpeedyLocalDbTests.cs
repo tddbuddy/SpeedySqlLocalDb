@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using TddBuddy.SpeedySqlLocalDb.Attribute;
 using TddBuddy.SpeedySqlLocalDb.EF.Examples.ExampleDb;
 
 namespace TddBuddy.SpeedySqlLocalDb.Tests

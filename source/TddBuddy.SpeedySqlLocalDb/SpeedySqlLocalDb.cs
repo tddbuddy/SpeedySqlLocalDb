@@ -1,3 +1,4 @@
+using System;
 using System.Data.SqlClient;
 using System.IO;
 using System.Transactions;
@@ -31,7 +32,8 @@ namespace TddBuddy.SpeedySqlLocalDb
                 $"Data Source={_contextVariables.LocalDbName};AttachDBFileName={_contextVariables.DbPath};Initial Catalog={_contextVariables.DbName};Integrated Security=True;";
             var connection = new SqlConnection(connectionString);
 
-            var transactionScope = new TransactionScope();
+            var scopeTimeout = new TimeSpan(0,0,_contextVariables.TransactionTimeoutMinutes,0);
+            var transactionScope = new TransactionScope(TransactionScopeOption.Required, scopeTimeout);
             return new SpeedySqlLocalDbWrapper(connection, transactionScope);
         }
         
