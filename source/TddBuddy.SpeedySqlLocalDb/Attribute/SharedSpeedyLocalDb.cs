@@ -37,32 +37,6 @@ namespace TddBuddy.SpeedySqlLocalDb.Attribute
         {
             DetachDatabase();
         }
-        
-        private DbContext CreateDbContext(DbConnection connection)
-        {
-            // todo : if _dbContextTypeArgs not null use them to make instance
-            if (_dbContextTypeArgs.Length == 0)
-            {
-                return (DbContext) Activator.CreateInstance(_dbContextType, connection);
-            }
-
-            return BuildDbContextWithArguments(connection);
-        }
-
-        private DbContext BuildDbContextWithArguments(DbConnection connection)
-        {
-            var argValues = new List<object>
-            {
-                connection
-            };
-
-            foreach (var value in _dbContextTypeArgs)
-            {
-                argValues.Add(Activator.CreateInstance(value));
-            }
-
-            return (DbContext) Activator.CreateInstance(_dbContextType, argValues.ToArray());
-        }
 
         // todo : TEST THIS
         private void CleanUpOldDatabases()
@@ -113,13 +87,46 @@ namespace TddBuddy.SpeedySqlLocalDb.Attribute
 
         private void BootstrapDatabaseForEfMigrations()
         {
-            using (var connectionWrapper = _speedyInstance.CreateSpeedyLocalDbWrapper())
+            try
             {
-                var repositoryDbContext = CreateDbContext(connectionWrapper.Connection);
-                // force EF migrations to run and build db
-                repositoryDbContext.Database.ExecuteSqlCommand("select 1");
-                connectionWrapper.CompleteTransaction();
+                using (var connectionWrapper = _speedyInstance.CreateSpeedyLocalDbWrapper())
+                {
+                    var repositoryDbContext = CreateDbContext(connectionWrapper.Connection);
+                    // force EF migrations to run and build db
+                    repositoryDbContext.Database.ExecuteSqlCommand("select 1");
+                    connectionWrapper.CompleteTransaction();
+                }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Bootstrap Exception: {e.Message}");
+            }
+        }
+
+
+        private DbContext CreateDbContext(DbConnection connection)
+        {
+            if (_dbContextTypeArgs.Length == 0)
+            {
+                return (DbContext)Activator.CreateInstance(_dbContextType, connection);
+            }
+
+            return BuildDbContextWithArguments(connection);
+        }
+
+        private DbContext BuildDbContextWithArguments(DbConnection connection)
+        {
+            var argValues = new List<object>
+            {
+                connection
+            };
+
+            foreach (var value in _dbContextTypeArgs)
+            {
+                argValues.Add(Activator.CreateInstance(value));
+            }
+
+            return (DbContext)Activator.CreateInstance(_dbContextType, argValues.ToArray());
         }
 
         private void DetachDatabase()
