@@ -111,7 +111,7 @@ namespace TddBuddy.SpeedySqlLocalDb.Attribute
 
         private DbContext CreateDbContext(DbConnection connection)
         {
-            if (_dbContextTypeArgs.Length == 0)
+            if (_dbContextTypeArgs == nullTypeArgs)
             {
                 return (DbContext)Activator.CreateInstance(_dbContextType, connection);
             }
