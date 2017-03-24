@@ -15,15 +15,20 @@ namespace TddBuddy.SpeedySqlLocalDb
         }
 
         public ISpeedySqlLocalDbWrapper CreateSpeedyLocalDbWrapper()
-        {            
+        {
             CreateDirectoryIfNotExist(_contextVariables.OutputFolder);
 
-            if (!File.Exists(_contextVariables.DbPath))
+            if (!DoesDbFileExist())
             {
                 CreateDatabase();
             }
 
             return CreateWrapper();
+        }
+
+        private bool DoesDbFileExist()
+        {
+            return File.Exists(_contextVariables.DbPath);
         }
 
         private SpeedySqlLocalDbWrapper CreateWrapper()

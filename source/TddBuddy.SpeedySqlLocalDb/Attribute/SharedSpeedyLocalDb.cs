@@ -14,9 +14,9 @@ namespace TddBuddy.SpeedySqlLocalDb.Attribute
         private readonly ISpeedySqlLocalDb _speedyInstance;
         private readonly ContextVariables _contextVariables;
 
-        public SharedSpeedyLocalDb(Type dbContextType) : this(dbContextType, new Type[0])
-        {
-        }
+        private static Type[] nullTypeArgs = new Type[0];
+
+        public SharedSpeedyLocalDb(Type dbContextType) : this(dbContextType, nullTypeArgs){}
 
         public SharedSpeedyLocalDb(Type dbContextType, params Type[] dbContextTypeArgs)
         {
@@ -50,18 +50,23 @@ namespace TddBuddy.SpeedySqlLocalDb.Attribute
 
                 using (var cmd = connection.CreateCommand())
                 {
-                    try
-                    {
-                        connection.Open();
-                        cmd.CommandText = cleanCmd;
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch (Exception e)
-                    {
-                        // could be a pathing issue to DB or other sillyness
-                        Console.Write($"Failed attempting to clean up old connections - {e.Message}");
-                    }
+                    RemoveDatabases(connection, cleanCmd, cmd);
                 }
+            }
+        }
+
+        private void RemoveDatabases(SqlConnection connection, string cleanCmd, SqlCommand cmd)
+        {
+            try
+            {
+                connection.Open();
+                cmd.CommandText = cleanCmd;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                // could be a pathing issue to DB or other sillyness
+                Console.Write($"Failed attempting to clean up old connections - {e.Message}");
             }
         }
 
@@ -116,10 +121,7 @@ namespace TddBuddy.SpeedySqlLocalDb.Attribute
 
         private DbContext BuildDbContextWithArguments(DbConnection connection)
         {
-            var argValues = new List<object>
-            {
-                connection
-            };
+            var argValues = new List<object> { connection };
 
             foreach (var value in _dbContextTypeArgs)
             {
