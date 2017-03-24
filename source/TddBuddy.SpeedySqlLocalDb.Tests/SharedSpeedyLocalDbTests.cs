@@ -24,7 +24,7 @@ namespace TddBuddy.SpeedySqlLocalDb.Tests
             //---------------Execute Test ----------------------
             var result = Assert.Throws<Exception>(() => new SharedSpeedyLocalDb(typeof(string)));
             //---------------Test Result -----------------------
-            Assert.AreEqual("Type must be Subclass of DbContext", result.Message);
+            Assert.AreEqual("dbContextType must be a subclass of DbContext", result.Message);
         }
     }
 }

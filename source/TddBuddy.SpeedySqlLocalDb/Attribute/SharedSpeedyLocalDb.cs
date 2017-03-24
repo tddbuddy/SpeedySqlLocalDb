@@ -22,7 +22,7 @@ namespace TddBuddy.SpeedySqlLocalDb.Attribute
         {
             if (!dbContextType.IsSubclassOf(typeof(DbContext)))
             {
-                throw new Exception("Type must be Subclass of DbContext");
+                throw new Exception($"{nameof(dbContextType)} must be a subclass of DbContext");
             }
 
             _dbContextType = dbContextType;
