@@ -6,9 +6,7 @@
     <title>SpeedySqlLocalDb</title>
     <authors>TddBuddy</authors>
     <owners>TddBuddy</owners>
-    <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
-    <projectUrl>https://github.com/T-rav/SpeedySqlLocalDb</projectUrl>
-    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    <projectUrl>https://github.com/TddBuddy/SpeedySqlLocalDb</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A super quick localDb testing framework for use with Entity Framework. 
 	It uses a localDB instance for the entire test run's life. 
@@ -19,6 +17,6 @@ This framework was sliced out of from a production project where the test runs w
     </summary>
     <releaseNotes>A breaking release. No longer is there a need to use setup and tear down. Just annotate the test class and all is automagiced away.</releaseNotes>
     <copyright>Copyright 2017</copyright>
-    <tags>LocalDb EF O/RM .NET Database TDD</tags>
+    <tags>LocalDb EF O/RM .NET Database TDD NUnit</tags>
   </metadata>
 </package>
