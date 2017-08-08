@@ -4,10 +4,12 @@ using System.Data.Common;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Text;
+using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 
 namespace TddBuddy.SpeedySqlLocalDb.Attribute
 {
-    public sealed class SharedSpeedyLocalDb : System.Attribute, IDisposable
+    public sealed class SharedSpeedyLocalDb : System.Attribute, IDisposable, ITestAction
     {        
         private readonly Type _dbContextType;
         private readonly Type[] _dbContextTypeArgs;
@@ -153,5 +155,17 @@ namespace TddBuddy.SpeedySqlLocalDb.Attribute
                 Console.WriteLine($"Couldn't detatch database {_contextVariables.DbName} - {ex.Message}");
             }
         }
+
+        public void BeforeTest(ITest test)
+        {
+            // do nothing
+        }
+
+        public void AfterTest(ITest test)
+        {
+            // do nothing
+        }
+
+        public ActionTargets Targets => ActionTargets.Suite;
     }
 }

@@ -8,8 +8,7 @@ using TddBuddy.SpeedySqlLocalDb.EF.Examples.ExampleDb;
 
 namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
 {
-    [TestFixture]
-    [SharedSpeedyLocalDb(typeof(AuditingDbContext), typeof(DateTimeProvider))]
+    [TestFixture, SharedSpeedyLocalDb(typeof(AuditingDbContext), typeof(DateTimeProvider))]
     public class AuditRepositoryTests
     {
         [Test]

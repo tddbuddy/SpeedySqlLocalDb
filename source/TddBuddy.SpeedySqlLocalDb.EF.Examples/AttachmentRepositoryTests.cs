@@ -8,8 +8,7 @@ using TddBuddy.SpeedySqlLocalDb.EF.Examples.ExampleDb;
 
 namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
 {
-    [TestFixture]
-    [SharedSpeedyLocalDb(typeof(AttachmentDbContext))]
+    [TestFixture, SharedSpeedyLocalDb(typeof(AttachmentDbContext))]
     public class AttachmentRepositoryTests 
     {
         [Test]
