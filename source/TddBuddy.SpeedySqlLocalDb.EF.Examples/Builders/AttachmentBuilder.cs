@@ -1,6 +1,7 @@
 using System;
+using TddBuddy.SpeedySqlLocalDb.EF.Examples.Entities;
 
-namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Example.EntityFramework
+namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Builders
 {
     public class AttachmentBuilder
     {

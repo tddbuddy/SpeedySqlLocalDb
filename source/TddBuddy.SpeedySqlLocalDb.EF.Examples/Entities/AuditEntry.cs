@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Example.EntityFramework
+namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Entities
 {
     public class AuditEntry
     {

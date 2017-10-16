@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Data.Common;
 using System.Data.Entity;
+using TddBuddy.SpeedySqlLocalDb.EF.Examples.Entities;
 
-namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Example.EntityFramework
+namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Context
 {
     public class AuditingDbContext : DbContext, IDateTimeProvider
     {

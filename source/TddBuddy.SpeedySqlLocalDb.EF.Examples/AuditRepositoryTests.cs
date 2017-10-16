@@ -4,7 +4,9 @@ using System.Linq;
 using NUnit.Framework;
 using TddBuddy.SpeedySqlLocalDb.Attribute;
 using TddBuddy.SpeedySqlLocalDb.Construction;
-using TddBuddy.SpeedySqlLocalDb.EF.Examples.Example.EntityFramework;
+using TddBuddy.SpeedySqlLocalDb.EF.Examples.Context;
+using TddBuddy.SpeedySqlLocalDb.EF.Examples.Entities;
+using TddBuddy.SpeedySqlLocalDb.EF.Examples.Repositories;
 
 namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
 {

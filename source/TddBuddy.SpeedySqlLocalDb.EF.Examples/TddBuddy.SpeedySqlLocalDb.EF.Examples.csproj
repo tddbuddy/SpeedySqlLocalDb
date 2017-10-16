@@ -59,18 +59,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Example.EntityFramework\AuditRepository.cs" />
+    <Compile Include="Repositories\AuditRepository.cs" />
     <Compile Include="AuditRepositoryTests.cs" />
-    <Compile Include="Example.EntityFramework\AuditEntry.cs" />
-    <Compile Include="Example.EntityFramework\DateTimeProvider.cs" />
-    <Compile Include="Example.EntityFramework\Attachment.cs" />
-    <Compile Include="Example.EntityFramework\AttachmentBuilder.cs" />
-    <Compile Include="Example.EntityFramework\AttachmentRepository.cs" />
+    <Compile Include="Entities\AuditEntry.cs" />
+    <Compile Include="DateTime\DateTimeProvider.cs" />
+    <Compile Include="Entities\Attachment.cs" />
+    <Compile Include="Builders\AttachmentBuilder.cs" />
+    <Compile Include="Repositories\AttachmentRepository.cs" />
     <Compile Include="AttachmentRepositoryTests.cs" />
-    <Compile Include="Example.EntityFramework\AttachmentDbContext.cs" />
-    <Compile Include="Example.EntityFramework\AuditingDbContext.cs" />
-    <Compile Include="Example.EntityFramework\IAttachmentRepository.cs" />
-    <Compile Include="Example.EntityFramework\IDateTimeProvider.cs" />
+    <Compile Include="Context\AttachmentDbContext.cs" />
+    <Compile Include="Context\AuditingDbContext.cs" />
+    <Compile Include="DateTime\IDateTimeProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

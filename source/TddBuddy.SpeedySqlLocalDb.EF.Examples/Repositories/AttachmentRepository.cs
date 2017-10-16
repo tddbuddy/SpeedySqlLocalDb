@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using TddBuddy.SpeedySqlLocalDb.EF.Examples.Context;
+using TddBuddy.SpeedySqlLocalDb.EF.Examples.Entities;
 
-namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Example.EntityFramework
+namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Repositories
 {
-    public class AttachmentRepository : IAttachmentRepository
+    public class AttachmentRepository 
     {
         private readonly AttachmentDbContext _dbContext;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Example.EntityFramework
+namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Entities
 {
     public interface IDateTimeProvider  
     {
