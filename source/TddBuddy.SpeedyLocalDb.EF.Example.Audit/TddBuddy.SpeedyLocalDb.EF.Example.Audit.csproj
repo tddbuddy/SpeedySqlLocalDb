@@ -52,6 +52,7 @@
     <Compile Include="DateTime\DateTimeProvider.cs" />
     <Compile Include="DateTime\IDateTimeProvider.cs" />
     <Compile Include="Entities\AuditEntry.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

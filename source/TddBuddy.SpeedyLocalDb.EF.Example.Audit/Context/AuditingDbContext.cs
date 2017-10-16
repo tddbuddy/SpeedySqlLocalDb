@@ -11,9 +11,21 @@ namespace TddBuddy.SpeedyLocalDb.EF.Example.Audit.Context
 
         public System.DateTime Now => _dateTimeProvider.Now;
 
+        public AuditingDbContext() : this(new DateTimeProvider())
+        {
+            
+        }
+
+        public AuditingDbContext(IDateTimeProvider dateTimeProvider) : base("AuditingContext")
+        {
+            _dateTimeProvider = dateTimeProvider;
+            //Database.SetInitializer<AuditingDbContext>(null);
+        }
+
         public AuditingDbContext(DbConnection connection, IDateTimeProvider dateTimeProvider) : base(connection, false)
         {
             _dateTimeProvider = dateTimeProvider;
+            //Database.SetInitializer<AuditingDbContext>(null);
         }
 
         public IDbSet<AuditEntry> AuditEntries { get; set; }
