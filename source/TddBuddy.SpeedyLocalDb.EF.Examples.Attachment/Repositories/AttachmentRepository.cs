@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using TddBuddy.SpeedySqlLocalDb.EF.Examples.Context;
-using TddBuddy.SpeedySqlLocalDb.EF.Examples.Entities;
+using TddBuddy.SpeedyLocalDb.EF.Examples.Attachment.Context;
 
-namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Repositories
+namespace TddBuddy.SpeedyLocalDb.EF.Examples.Attachment.Repositories
 {
     public class AttachmentRepository 
     {
@@ -16,23 +15,23 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Repositories
             _dbContext = dbContext;
         }
 
-        public Attachment Find(Guid id)
+        public Entities.Attachment Find(Guid id)
         {
             var attachment = _dbContext.Attachments.FirstOrDefault(r => r.Id == id);
             return attachment;
         }
 
-        public List<Attachment> FindAll()
+        public List<Entities.Attachment> FindAll()
         {
             return _dbContext.Attachments.ToList();
         }
 
-        public void Create(Attachment attachment)
+        public void Create(Entities.Attachment attachment)
         {
             _dbContext.Attachments.Add(attachment);
         }
 
-        public void Update(Attachment attachment)
+        public void Update(Entities.Attachment attachment)
         {
             _dbContext.Entry(attachment).State = EntityState.Modified;
         }

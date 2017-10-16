@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
+using TddBuddy.SpeedyLocalDb.EF.Examples.Attachment.Context;
 using TddBuddy.SpeedySqlLocalDb.Attribute;
-using TddBuddy.SpeedySqlLocalDb.EF.Examples.Context;
 
 namespace TddBuddy.SpeedySqlLocalDb.Tests
 {

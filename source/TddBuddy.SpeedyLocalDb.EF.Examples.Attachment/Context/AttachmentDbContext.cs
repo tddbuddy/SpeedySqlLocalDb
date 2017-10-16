@@ -1,8 +1,7 @@
 using System.Data.Common;
 using System.Data.Entity;
-using TddBuddy.SpeedySqlLocalDb.EF.Examples.Entities;
 
-namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Context
+namespace TddBuddy.SpeedyLocalDb.EF.Examples.Attachment.Context
 { 
 
     public class AttachmentDbContext : DbContext
@@ -18,7 +17,7 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Context
         {
         }
 
-        public IDbSet<Attachment> Attachments { get; set; }
+        public IDbSet<Entities.Attachment> Attachments { get; set; }
 
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Entities
+namespace TddBuddy.SpeedyLocalDb.EF.Examples.Attachment.Entities
 {
     public class Attachment
     {

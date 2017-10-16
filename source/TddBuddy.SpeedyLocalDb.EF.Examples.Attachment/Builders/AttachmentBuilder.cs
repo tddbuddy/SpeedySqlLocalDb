@@ -1,7 +1,6 @@
 using System;
-using TddBuddy.SpeedySqlLocalDb.EF.Examples.Entities;
 
-namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Builders
+namespace TddBuddy.SpeedyLocalDb.EF.Examples.Attachment.Builders
 {
     public class AttachmentBuilder
     {
@@ -42,9 +41,9 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Builders
             return this;
         }
 
-        public Attachment Build()
+        public Entities.Attachment Build()
         {
-            return new Attachment
+            return new Entities.Attachment
             {
                 Id = _id,
                 FileName = _fileName,

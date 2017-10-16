@@ -8,9 +8,6 @@ using TddBuddy.SpeedyLocalDb.EF.Example.Audit.DateTime;
 using TddBuddy.SpeedyLocalDb.EF.Example.Audit.Entities;
 using TddBuddy.SpeedySqlLocalDb.Attribute;
 using TddBuddy.SpeedySqlLocalDb.Construction;
-using TddBuddy.SpeedySqlLocalDb.EF.Examples.Context;
-using TddBuddy.SpeedySqlLocalDb.EF.Examples.Entities;
-using TddBuddy.SpeedySqlLocalDb.EF.Examples.Repositories;
 
 namespace TddBuddy.SpeedySqlLocalDb.Tests
 {
