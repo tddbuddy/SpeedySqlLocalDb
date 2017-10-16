@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Entities
+namespace TddBuddy.SpeedyLocalDb.EF.Example.Audit.Entities
 {
     public class AuditEntry
     {
@@ -11,6 +11,6 @@ namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Entities
         public string System { get; set; }
         public string User { get; set; }
         public string LogDetail { get; set; }
-        public DateTime CreateTimestamp { get; set; }
+        public System.DateTime CreateTimestamp { get; set; }
     }
 }

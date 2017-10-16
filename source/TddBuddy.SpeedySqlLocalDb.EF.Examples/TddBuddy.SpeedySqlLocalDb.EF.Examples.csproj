@@ -59,17 +59,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Repositories\AuditRepository.cs" />
-    <Compile Include="AuditRepositoryTests.cs" />
-    <Compile Include="Entities\AuditEntry.cs" />
-    <Compile Include="DateTime\DateTimeProvider.cs" />
     <Compile Include="Entities\Attachment.cs" />
     <Compile Include="Builders\AttachmentBuilder.cs" />
     <Compile Include="Repositories\AttachmentRepository.cs" />
     <Compile Include="AttachmentRepositoryTests.cs" />
     <Compile Include="Context\AttachmentDbContext.cs" />
-    <Compile Include="Context\AuditingDbContext.cs" />
-    <Compile Include="DateTime\IDateTimeProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,13 +2,17 @@
 using System.Data.Common;
 using System.Linq;
 using NUnit.Framework;
+using TddBuddy.SpeedyLocalDb.EF.Example.Audit;
+using TddBuddy.SpeedyLocalDb.EF.Example.Audit.Context;
+using TddBuddy.SpeedyLocalDb.EF.Example.Audit.DateTime;
+using TddBuddy.SpeedyLocalDb.EF.Example.Audit.Entities;
 using TddBuddy.SpeedySqlLocalDb.Attribute;
 using TddBuddy.SpeedySqlLocalDb.Construction;
 using TddBuddy.SpeedySqlLocalDb.EF.Examples.Context;
 using TddBuddy.SpeedySqlLocalDb.EF.Examples.Entities;
 using TddBuddy.SpeedySqlLocalDb.EF.Examples.Repositories;
 
-namespace TddBuddy.SpeedySqlLocalDb.EF.Examples
+namespace TddBuddy.SpeedySqlLocalDb.Tests
 {
     [TestFixture, SharedSpeedyLocalDb(typeof(AuditingDbContext), typeof(DateTimeProvider))]
     public class AuditRepositoryTests

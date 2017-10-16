@@ -1,7 +1,7 @@
-﻿using TddBuddy.SpeedySqlLocalDb.EF.Examples.Context;
-using TddBuddy.SpeedySqlLocalDb.EF.Examples.Entities;
+﻿using TddBuddy.SpeedyLocalDb.EF.Example.Audit.Context;
+using TddBuddy.SpeedyLocalDb.EF.Example.Audit.Entities;
 
-namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Repositories
+namespace TddBuddy.SpeedyLocalDb.EF.Example.Audit
 {
     public class AuditRepository
     {

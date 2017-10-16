@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditRepositoryTests.cs" />
     <Compile Include="SharedSpeedyLocalDbTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -65,6 +66,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TddBuddy.SpeedyLocalDb.EF.Example.Audit\TddBuddy.SpeedyLocalDb.EF.Example.Audit.csproj">
+      <Project>{41CD7721-976B-44AD-8BC2-80FF3FD9E31D}</Project>
+      <Name>TddBuddy.SpeedyLocalDb.EF.Example.Audit</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TddBuddy.SpeedySqlLocalDb.EF.Examples\TddBuddy.SpeedySqlLocalDb.EF.Examples.csproj">
       <Project>{4F326C8A-D2A5-4DE1-B292-2D0AB05D6BAA}</Project>
       <Name>TddBuddy.SpeedySqlLocalDb.EF.Examples</Name>
