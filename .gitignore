@@ -4,3 +4,4 @@
 source/.vs/SpeedySqlLocalDb/v14/.suo
 **/*.coverage
 **/*.nupkg
+**/.suo

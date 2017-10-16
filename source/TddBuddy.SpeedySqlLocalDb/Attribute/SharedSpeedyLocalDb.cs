@@ -16,9 +16,9 @@ namespace TddBuddy.SpeedySqlLocalDb.Attribute
         private readonly ISpeedySqlLocalDb _speedyInstance;
         private readonly ContextVariables _contextVariables;
 
-        private static Type[] nullTypeArgs = new Type[0];
+        private static readonly Type[] NullTypeArgs = new Type[0];
 
-        public SharedSpeedyLocalDb(Type dbContextType) : this(dbContextType, nullTypeArgs){}
+        public SharedSpeedyLocalDb(Type dbContextType) : this(dbContextType, NullTypeArgs){}
 
         public SharedSpeedyLocalDb(Type dbContextType, params Type[] dbContextTypeArgs)
         {
@@ -113,7 +113,7 @@ namespace TddBuddy.SpeedySqlLocalDb.Attribute
 
         private DbContext CreateDbContext(DbConnection connection)
         {
-            if (_dbContextTypeArgs == nullTypeArgs)
+            if (_dbContextTypeArgs == NullTypeArgs)
             {
                 return (DbContext)Activator.CreateInstance(_dbContextType, connection);
             }
