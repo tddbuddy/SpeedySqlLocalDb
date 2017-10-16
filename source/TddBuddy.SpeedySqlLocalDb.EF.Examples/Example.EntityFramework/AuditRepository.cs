@@ -1,4 +1,4 @@
-﻿namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.ExampleDb
+﻿namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Example.EntityFramework
 {
     public class AuditRepository
     {

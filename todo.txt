@@ -1,0 +1,3 @@
+- Support fluent migrations
+- Add fluent migration example
+- Add EF migation support

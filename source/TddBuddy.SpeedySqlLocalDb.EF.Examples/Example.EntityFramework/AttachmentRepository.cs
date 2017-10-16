@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
-namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.ExampleDb
+namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Example.EntityFramework
 {
     public class AttachmentRepository : IAttachmentRepository
     {

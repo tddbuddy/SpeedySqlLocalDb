@@ -1,4 +1,4 @@
-﻿namespace TddBuddy.SpeedySqlLocalDb
+﻿namespace TddBuddy.SpeedySqlLocalDb.Construction
 {
     public class SpeedySqlFactory
     {

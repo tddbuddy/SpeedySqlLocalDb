@@ -59,18 +59,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExampleDb\AuditRepository.cs" />
+    <Compile Include="Example.EntityFramework\AuditRepository.cs" />
     <Compile Include="AuditRepositoryTests.cs" />
-    <Compile Include="ExampleDb\AuditEntry.cs" />
-    <Compile Include="ExampleDb\DateTimeProvider.cs" />
-    <Compile Include="ExampleDb\Attachment.cs" />
-    <Compile Include="ExampleDb\AttachmentBuilder.cs" />
-    <Compile Include="ExampleDb\AttachmentRepository.cs" />
+    <Compile Include="Example.EntityFramework\AuditEntry.cs" />
+    <Compile Include="Example.EntityFramework\DateTimeProvider.cs" />
+    <Compile Include="Example.EntityFramework\Attachment.cs" />
+    <Compile Include="Example.EntityFramework\AttachmentBuilder.cs" />
+    <Compile Include="Example.EntityFramework\AttachmentRepository.cs" />
     <Compile Include="AttachmentRepositoryTests.cs" />
-    <Compile Include="ExampleDb\AttachmentDbContext.cs" />
-    <Compile Include="ExampleDb\AuditingDbContext.cs" />
-    <Compile Include="ExampleDb\IAttachmentRepository.cs" />
-    <Compile Include="ExampleDb\IDateTimeProvider.cs" />
+    <Compile Include="Example.EntityFramework\AttachmentDbContext.cs" />
+    <Compile Include="Example.EntityFramework\AuditingDbContext.cs" />
+    <Compile Include="Example.EntityFramework\IAttachmentRepository.cs" />
+    <Compile Include="Example.EntityFramework\IDateTimeProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +87,9 @@
       <Project>{c4e7fd71-2eac-491f-b2a4-ae01008eef06}</Project>
       <Name>TddBuddy.SpeedySqlLocalDb</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Example.FluentMigrator\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

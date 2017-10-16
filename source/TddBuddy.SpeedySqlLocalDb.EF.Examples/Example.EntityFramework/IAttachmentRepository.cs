@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.ExampleDb
+namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Example.EntityFramework
 {
     public interface IAttachmentRepository
     {

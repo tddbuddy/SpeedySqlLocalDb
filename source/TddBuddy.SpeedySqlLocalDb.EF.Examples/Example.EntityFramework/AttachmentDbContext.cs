@@ -1,7 +1,7 @@
 using System.Data.Common;
 using System.Data.Entity;
 
-namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.ExampleDb
+namespace TddBuddy.SpeedySqlLocalDb.EF.Examples.Example.EntityFramework
 { 
 
     public class AttachmentDbContext : DbContext
