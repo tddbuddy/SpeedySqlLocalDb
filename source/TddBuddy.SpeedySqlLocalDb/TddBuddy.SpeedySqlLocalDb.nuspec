@@ -5,7 +5,7 @@
     <version>$version$</version>
     <title>SpeedySqlLocalDb</title>
     <authors>TddBuddy</authors>
-    <owners>TddBuddy</owners>
+    <owners>StoneAge Technologies</owners>
     <projectUrl>https://github.com/TddBuddy/SpeedySqlLocalDb</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A super quick localDb testing framework for use with Entity Framework. 
