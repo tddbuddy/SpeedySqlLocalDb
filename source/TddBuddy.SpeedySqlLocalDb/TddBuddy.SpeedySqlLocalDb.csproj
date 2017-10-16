@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MigrationRunner\EntityFrameworkMigrationRunner.cs" />
     <Compile Include="ContextVariables.cs" />
     <Compile Include="ISpeedyLocalDbWrapper.cs" />
     <Compile Include="ISpeedySqlLocalDb.cs" />

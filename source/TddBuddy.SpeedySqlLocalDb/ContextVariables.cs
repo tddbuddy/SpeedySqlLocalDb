@@ -16,6 +16,8 @@ namespace TddBuddy.SpeedySqlLocalDb
         
         public string DbName => _dbName;
         private static string _dbName;
+        public bool HaveMigrationsRan { get; set; }
+        public Action MigrationAction { get; set; }
 
         public int TransactionTimeoutMinutes { get; set; }
 
@@ -32,6 +34,8 @@ namespace TddBuddy.SpeedySqlLocalDb
             DbLogPath = Path.Combine(OutputFolder, $"{DbName}_log.ldf");
 
             TransactionTimeoutMinutes = 1;
+            MigrationAction = () => { };
+            HaveMigrationsRan = false;
         }
 
         private string GetRandomTestDbNameForTestRun()

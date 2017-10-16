@@ -26,5 +26,14 @@ namespace TddBuddy.SpeedySqlLocalDb.Tests
             //---------------Test Result -----------------------
             Assert.AreEqual("dbContextType must be a subclass of DbContext", result.Message);
         }
+
+        [Test]
+        public void Ctor_WhenDefault_ShouldNotThrowException()
+        {
+            //---------------Set up test pack-------------------
+            //---------------Execute Test ----------------------
+            //---------------Test Result -----------------------
+            Assert.DoesNotThrow(() => new SharedSpeedyLocalDb());
+        }
     }
 }

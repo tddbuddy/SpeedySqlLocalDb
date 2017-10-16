@@ -1,38 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Text;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
+using TddBuddy.SpeedySqlLocalDb.MigrationRunner;
 
 namespace TddBuddy.SpeedySqlLocalDb.Attribute
 {
     public sealed class SharedSpeedyLocalDb : System.Attribute, IDisposable, ITestAction
     {        
-        private readonly Type _dbContextType;
-        private readonly Type[] _dbContextTypeArgs;
-        private readonly ISpeedySqlLocalDb _speedyInstance;
         private readonly ContextVariables _contextVariables;
 
-        private static readonly Type[] NullTypeArgs = new Type[0];
+        public SharedSpeedyLocalDb(Type dbContextType) : this(dbContextType, EntityFrameworkMigrationRunner.NullTypeArgs){}
 
-        public SharedSpeedyLocalDb(Type dbContextType) : this(dbContextType, NullTypeArgs){}
-
-        public SharedSpeedyLocalDb(Type dbContextType, params Type[] dbContextTypeArgs)
+        public SharedSpeedyLocalDb(Type dbContextType, params Type[] dbContextTypeArgs) :this()
         {
             if (!dbContextType.IsSubclassOf(typeof(DbContext)))
             {
                 throw new Exception($"{nameof(dbContextType)} must be a subclass of DbContext");
             }
 
-            _dbContextType = dbContextType;
-            _dbContextTypeArgs = dbContextTypeArgs;
+            RunEntityFrameworkMigrations(dbContextType, dbContextTypeArgs);   
+        }
+
+        public SharedSpeedyLocalDb()
+        {
             _contextVariables = new ContextVariables();
-            _speedyInstance = new SpeedySqlLocalDb(_contextVariables);
-            BootstrapDatabaseForEfMigrations();
             CleanUpOldDatabases();
+        }
+
+        private void RunEntityFrameworkMigrations(Type dbContextType, Type[] dbContextTypeArgs)
+        {
+            var speedySqlLocalDbWrapper = new SpeedySqlLocalDb(_contextVariables).CreateSpeedyLocalDbWrapper();
+            var migrationRunner = new EntityFrameworkMigrationRunner();
+            migrationRunner.RunMigrations(speedySqlLocalDbWrapper, dbContextType, dbContextTypeArgs);
         }
 
         public void Dispose()
@@ -90,47 +92,6 @@ namespace TddBuddy.SpeedySqlLocalDb.Attribute
             cleanCmd.AppendLine("end catch");
             cleanCmd.AppendLine("end");
             return cleanCmd.ToString();
-        }
-
-        private void BootstrapDatabaseForEfMigrations()
-        {
-            try
-            {
-                using (var connectionWrapper = _speedyInstance.CreateSpeedyLocalDbWrapper())
-                {
-                    var repositoryDbContext = CreateDbContext(connectionWrapper.Connection);
-                    // force EF migrations to run and build db
-                    repositoryDbContext.Database.ExecuteSqlCommand("select 1");
-                    connectionWrapper.CompleteTransaction();
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Bootstrap Exception: {e.Message}");
-            }
-        }
-
-
-        private DbContext CreateDbContext(DbConnection connection)
-        {
-            if (_dbContextTypeArgs == NullTypeArgs)
-            {
-                return (DbContext)Activator.CreateInstance(_dbContextType, connection);
-            }
-
-            return BuildDbContextWithArguments(connection);
-        }
-
-        private DbContext BuildDbContextWithArguments(DbConnection connection)
-        {
-            var argValues = new List<object> { connection };
-
-            foreach (var value in _dbContextTypeArgs)
-            {
-                argValues.Add(Activator.CreateInstance(value));
-            }
-
-            return (DbContext)Activator.CreateInstance(_dbContextType, argValues.ToArray());
         }
 
         private void DetachDatabase()

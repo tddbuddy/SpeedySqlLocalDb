@@ -18,12 +18,20 @@ namespace TddBuddy.SpeedySqlLocalDb
         {
             CreateDirectoryIfNotExist(_contextVariables.OutputFolder);
 
-            if (!DoesDbFileExist())
+            if (DoesDbFileExist())
             {
-                CreateDatabase();
+                return CreateDbWrapper();
             }
 
-            return CreateWrapper();
+            CreateDatabase();
+            RunMigrations();
+
+            return CreateDbWrapper();
+        }
+
+        private void RunMigrations()
+        {
+            _contextVariables.MigrationAction();
         }
 
         private bool DoesDbFileExist()
@@ -31,17 +39,23 @@ namespace TddBuddy.SpeedySqlLocalDb
             return File.Exists(_contextVariables.DbPath);
         }
 
-        private SpeedySqlLocalDbWrapper CreateWrapper()
+        private ISpeedySqlLocalDbWrapper CreateDbWrapper()
         {
-            var connectionString =
-                $"Data Source={_contextVariables.LocalDbName};AttachDBFileName={_contextVariables.DbPath};Initial Catalog={_contextVariables.DbName};Integrated Security=True;";
-            var connection = new SqlConnection(connectionString);
-
+            var connection = CreateConnection();
+            
             var scopeTimeout = new TimeSpan(0,0,_contextVariables.TransactionTimeoutMinutes,0);
             var transactionScope = new TransactionScope(TransactionScopeOption.Required, scopeTimeout);
             return new SpeedySqlLocalDbWrapper(connection, transactionScope);
         }
-        
+
+        private SqlConnection CreateConnection()
+        {
+            var connectionString =
+                $"Data Source={_contextVariables.LocalDbName};AttachDBFileName={_contextVariables.DbPath};Initial Catalog={_contextVariables.DbName};Integrated Security=True;";
+            var connection = new SqlConnection(connectionString);
+            return connection;
+        }
+
         private void CreateDatabase()
         {
             var connectionString = $"Data Source={_contextVariables.LocalDbName};Initial Catalog=master;Integrated Security=True";
