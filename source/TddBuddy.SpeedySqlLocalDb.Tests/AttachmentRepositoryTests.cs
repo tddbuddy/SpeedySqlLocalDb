@@ -3,9 +3,10 @@ using System.Data.Common;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using NUnit.Framework;
-using TddBuddy.SpeedyLocalDb.EF.Examples.Attachment.Builders;
-using TddBuddy.SpeedyLocalDb.EF.Examples.Attachment.Context;
-using TddBuddy.SpeedyLocalDb.EF.Examples.Attachment.Repositories;
+using TddBuddy.SpeedyLocalDb.EF.Example.Attachment.Builders;
+using TddBuddy.SpeedyLocalDb.EF.Example.Attachment.Context;
+using TddBuddy.SpeedyLocalDb.EF.Example.Attachment.Entities;
+using TddBuddy.SpeedyLocalDb.EF.Example.Attachment.Repositories;
 using TddBuddy.SpeedySqlLocalDb.Attribute;
 using TddBuddy.SpeedySqlLocalDb.Construction;
 
@@ -304,7 +305,7 @@ namespace TddBuddy.SpeedySqlLocalDb.Tests
             }
         }
 
-        private void AssertIsEqual(SpeedyLocalDb.EF.Examples.Attachment.Entities.Attachment expectedAttachment, SpeedyLocalDb.EF.Examples.Attachment.Entities.Attachment actualAttachment)
+        private void AssertIsEqual(Attachment expectedAttachment, Attachment actualAttachment)
         {
             Assert.AreEqual(expectedAttachment.Id, actualAttachment.Id);
             Assert.AreEqual(expectedAttachment.FileName, actualAttachment.FileName);

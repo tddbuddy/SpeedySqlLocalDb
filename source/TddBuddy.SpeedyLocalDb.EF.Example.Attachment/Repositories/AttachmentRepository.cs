@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using TddBuddy.SpeedyLocalDb.EF.Examples.Attachment.Context;
+using TddBuddy.SpeedyLocalDb.EF.Example.Attachment.Context;
 
-namespace TddBuddy.SpeedyLocalDb.EF.Examples.Attachment.Repositories
+namespace TddBuddy.SpeedyLocalDb.EF.Example.Attachment.Repositories
 {
     public class AttachmentRepository 
     {

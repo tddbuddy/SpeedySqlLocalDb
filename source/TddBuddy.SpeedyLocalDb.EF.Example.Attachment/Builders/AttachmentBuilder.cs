@@ -1,6 +1,6 @@
 using System;
 
-namespace TddBuddy.SpeedyLocalDb.EF.Examples.Attachment.Builders
+namespace TddBuddy.SpeedyLocalDb.EF.Example.Attachment.Builders
 {
     public class AttachmentBuilder
     {

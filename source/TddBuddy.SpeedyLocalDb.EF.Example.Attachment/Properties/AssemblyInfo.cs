@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TddBuddy.SpeedyLocalDb.EF.Examples.Attachment")]
+[assembly: AssemblyTitle("TddBuddy.SpeedyLocalDb.EF.Example.Attachment")]
 [assembly: AssemblyDescription("An Entity Framework example of how to use SpeedyLocalDb for repository testing")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("StoneAge Technologies")]

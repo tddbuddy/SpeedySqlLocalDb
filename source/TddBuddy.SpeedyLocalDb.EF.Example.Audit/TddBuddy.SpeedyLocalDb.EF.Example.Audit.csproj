@@ -52,12 +52,21 @@
     <Compile Include="DateTime\DateTimeProvider.cs" />
     <Compile Include="DateTime\IDateTimeProvider.cs" />
     <Compile Include="Entities\AuditEntry.cs" />
+    <Compile Include="Migrations\201710161421268_Audit_Init.cs" />
+    <Compile Include="Migrations\201710161421268_Audit_Init.Designer.cs">
+      <DependentUpon>201710161421268_Audit_Init.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201710161421268_Audit_Init.resx">
+      <DependentUpon>201710161421268_Audit_Init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

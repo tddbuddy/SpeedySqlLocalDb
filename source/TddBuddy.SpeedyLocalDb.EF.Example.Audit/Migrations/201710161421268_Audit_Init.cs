@@ -1,20 +1,21 @@
-namespace TddBuddy.SpeedyLocalDb.EF.Examples.Attachment.Migrations
+namespace TddBuddy.SpeedyLocalDb.EF.Example.Audit.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Attachment_Init : DbMigration
+    public partial class Audit_Init : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.Attachments",
+                "dbo.AuditEntries",
                 c => new
                     {
                         Id = c.Guid(nullable: false),
-                        FileName = c.String(),
-                        ContentType = c.String(),
-                        Content = c.Binary(),
+                        System = c.String(),
+                        User = c.String(),
+                        LogDetail = c.String(),
+                        CreateTimestamp = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -22,7 +23,7 @@ namespace TddBuddy.SpeedyLocalDb.EF.Examples.Attachment.Migrations
         
         public override void Down()
         {
-            DropTable("dbo.Attachments");
+            DropTable("dbo.AuditEntries");
         }
     }
 }

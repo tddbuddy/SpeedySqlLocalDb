@@ -7,8 +7,8 @@
     <ProjectGuid>{4F326C8A-D2A5-4DE1-B292-2D0AB05D6BAA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TddBuddy.SpeedyLocalDb.EF.Examples.Attachment</RootNamespace>
-    <AssemblyName>TddBuddy.SpeedyLocalDb.EF.Examples.Attachment</AssemblyName>
+    <RootNamespace>TddBuddy.SpeedyLocalDb.EF.Example.Attachment</RootNamespace>
+    <AssemblyName>TddBuddy.SpeedyLocalDb.EF.Example.Attachment</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

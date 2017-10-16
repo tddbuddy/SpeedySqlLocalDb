@@ -1,2 +1,2 @@
 Write-Host "Adding migrations for EF.Examples.Attachment" -foregroundcolor "yellow"
-Add-Migration -ProjectName TddBuddy.SpeedyLocalDb.EF.Examples.Attachment -StartupProjectName TddBuddy.SpeedySqlLocalDb.Tests
+Add-Migration -ProjectName TddBuddy.SpeedyLocalDb.EF.Example.Attachment -StartupProjectName TddBuddy.SpeedySqlLocalDb.Tests

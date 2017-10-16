@@ -1,7 +1,7 @@
 using System.Data.Common;
 using System.Data.Entity;
 
-namespace TddBuddy.SpeedyLocalDb.EF.Examples.Attachment.Context
+namespace TddBuddy.SpeedyLocalDb.EF.Example.Attachment.Context
 { 
 
     public class AttachmentDbContext : DbContext
@@ -15,7 +15,7 @@ namespace TddBuddy.SpeedyLocalDb.EF.Examples.Attachment.Context
         // NOTE: This is a required test contructor, here so we can to reflective attribute magic
         public AttachmentDbContext(DbConnection dbConnection) : base(dbConnection, false)
         {
-            //Database.SetInitializer<AttachmentDbContext>(null);
+            Database.SetInitializer<AttachmentDbContext>(null);
         }
 
         public IDbSet<Entities.Attachment> Attachments { get; set; }
