@@ -19,7 +19,7 @@ namespace TddBuddy.SpeedySqlLocalDb.Construction
             return this;
         }
 
-        public SpeedySqlBuilder WithTransactionAction(Action transactionAction)
+        public SpeedySqlBuilder WithMigrationAction(Action transactionAction)
         {
             _migrationAction = transactionAction;
             return this;

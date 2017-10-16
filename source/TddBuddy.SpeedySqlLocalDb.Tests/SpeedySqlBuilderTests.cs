@@ -13,7 +13,7 @@ namespace TddBuddy.SpeedySqlLocalDb.Tests
             var result = string.Empty;
             var builder = new SpeedySqlBuilder();
             //---------------Execute Test ----------------------
-            builder.WithTransactionAction(() =>
+            builder.WithMigrationAction(() =>
             {
                 result = "transaction ran";
             });
@@ -41,7 +41,7 @@ namespace TddBuddy.SpeedySqlLocalDb.Tests
             var counter = 1;
             var builder = new SpeedySqlBuilder();
             //---------------Execute Test ----------------------
-            builder.WithTransactionAction(() =>
+            builder.WithMigrationAction(() =>
             {
                 result = $"transaction ran {counter} time(s)";
                 counter++;

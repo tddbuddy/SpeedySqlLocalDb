@@ -15,7 +15,7 @@ This framework was sliced out of from a production project where the test runs w
     <summary>
     Use this if you use LocalDb for integration testing. It will make your life easier. 
     </summary>
-    <releaseNotes>A breaking release. No longer is there a need to use setup and tear down. Just annotate the test class and all is automagiced away.</releaseNotes>
+    <releaseNotes>Added WithMigrationAction to facilitate the execution of Non-EF migrations. Just pass the action and it will bootstrap the same and EF with annotations.</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags>LocalDb EF O/RM .NET Database TDD NUnit</tags>
   </metadata>
