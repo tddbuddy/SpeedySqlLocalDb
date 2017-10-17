@@ -9,11 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddBuddy.SpeedySqlLocalDb",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddBuddy.SpeedySqlLocalDb.Tests", "TddBuddy.SpeedySqlLocalDb.Tests\TddBuddy.SpeedySqlLocalDb.Tests.csproj", "{51AEE238-271C-4CB4-8493-450F40E82B20}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "notes", "notes", "{E6DD48BE-32DB-440F-ABFE-EBE1D5695AF9}"
-	ProjectSection(SolutionItems) = preProject
-		..\todo.txt = ..\todo.txt
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddBuddy.SpeedyLocalDb.EF.Example.Audit", "TddBuddy.SpeedyLocalDb.EF.Example.Audit\TddBuddy.SpeedyLocalDb.EF.Example.Audit.csproj", "{41CD7721-976B-44AD-8BC2-80FF3FD9E31D}"
 EndProject
 Global
