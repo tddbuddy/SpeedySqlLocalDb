@@ -7,24 +7,30 @@ namespace TddBuddy.SpeedySqlLocalDb
 {
     public class ContextVariables
     {
+        public const string Prefix = "SpeedyDb_";
+
+        private static readonly string _dbName;
+        public string DbName => _dbName;
+
         public string LocalDbName => "(LocalDB)\\MSSQLLocalDb";
-        public string Prefix => "SpeedyDb_";
 
         public string DbPath { get; }
         public string DbLogPath { get; }
         public string OutputFolder { get; }
-        
-        public string DbName => _dbName;
-        private static string _dbName;
-        public bool HaveMigrationsRan { get; set; }
+
         public Action MigrationAction { get; set; }
 
         public int TransactionTimeoutMinutes { get; set; }
 
+        static ContextVariables()
+        {
+            _dbName = GetRandomTestDbNameForTestRun();
+        }
+
         public ContextVariables()
         {
             var executingAssembly = Assembly.GetExecutingAssembly();
-            _dbName = GetRandomTestDbNameForTestRun();
+           
 
             var tempDbDirectoryPath = Path.GetDirectoryName(executingAssembly.Location) ?? Path.GetTempPath();
             
@@ -35,12 +41,11 @@ namespace TddBuddy.SpeedySqlLocalDb
 
             TransactionTimeoutMinutes = 1;
             MigrationAction = () => { };
-            HaveMigrationsRan = false;
         }
 
-        private string GetRandomTestDbNameForTestRun()
+        private static string GetRandomTestDbNameForTestRun()
         {
-            if (DbName != null) return DbName;
+            if (_dbName != null) return _dbName;
 
             var dbName = Guid.NewGuid().ToString();
             var plainTextBytes = Encoding.UTF8.GetBytes(dbName);

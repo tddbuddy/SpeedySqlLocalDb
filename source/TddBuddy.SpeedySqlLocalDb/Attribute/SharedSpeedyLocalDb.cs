@@ -79,7 +79,7 @@ namespace TddBuddy.SpeedySqlLocalDb.Attribute
             var cleanCmd = new StringBuilder();
             cleanCmd.AppendLine("declare @tmp table(cmd nvarchar(1024));");
             cleanCmd.AppendLine(
-                $"insert into @tmp(cmd) select 'drop database ' + name from sys.databases where name like '{_contextVariables.Prefix}%' and is_cleanly_shutdown = 1;");
+                $"insert into @tmp(cmd) select 'drop database ' + name from sys.databases where name like '{ContextVariables.Prefix}%' and is_cleanly_shutdown = 1;");
             cleanCmd.AppendLine("declare @cmd nvarchar(1024);");
             cleanCmd.AppendLine("while exists(select * from @tmp)");
             cleanCmd.AppendLine("begin");
