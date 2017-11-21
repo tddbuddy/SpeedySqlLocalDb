@@ -1,6 +1,6 @@
 # SpeedySqlLocalDb
 
-**Please note: This package only works with Nunit 2, Nunit 3 does not properly execute the attribute**
+**Please note: This package only works with Nunit**
 
 A super quick localDB testing framework for use with Entity Framework. It uses a localDB instance for the entire test run's life. Each test's execution is wrapped into transaction to avoid test interfering with each other. This means the cost of setting up the DB is only paid once. That is when the first test executes and the EF migrations are run to initialize the DB to the correct state.
 
