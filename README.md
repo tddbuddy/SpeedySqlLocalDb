@@ -8,7 +8,7 @@ This framework was sliced out of from a production project where the test runs w
 
 Have a look at **SpeedySqlLocalDb/source/TddBuddy.SpeedySqlLocalDb.EF.Examples/AttachmentRepositoryTests.cs** for example of how to use it.
 
-An example:
+An example using it with EF:
 
     [TestFixture]
     [SharedSpeedyLocalDb(typeof(AttachmentDbContext))]
@@ -38,3 +38,16 @@ An example:
             }
         }
      }
+     
+To make use of the utilty with a non-EF migration framework you will need to adjust how you use the SpeedySqlBuilder. It must take a WithMigrationAction as per below.
+Then use an empty annotation on the class [SharedSpeedyLocalDb], this causes it to not try and run EF migrations.
+Intead the migrations action specified in the builder is run once like the EF migrations.
+Becuase EF migrations provide a lot of out of the box magic this was the best of all the bad solutions. 
+
+    return new SpeedySqlBuilder()
+               .WithTransactionTimeout(5)
+               .WithMigrationAction(() =>
+                {
+                    /* Add migration action here */
+                })
+                .BuildWrapper();
