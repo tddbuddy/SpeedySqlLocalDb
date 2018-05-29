@@ -11,7 +11,7 @@ using TddBuddy.SpeedySqlLocalDb.Construction;
 
 namespace TddBuddy.SpeedySqlLocalDb.Tests
 {
-    [TestFixture, SharedSpeedyLocalDb(typeof(AuditingDbContext), typeof(DateTimeProvider))]
+    [TestFixture, SharedSpeedyLocalDb(typeof(SqlConnection), typeof(DateTimeProvider))]
     public class AuditRepositoryTests
     {
         [Test]
@@ -55,12 +55,12 @@ namespace TddBuddy.SpeedySqlLocalDb.Tests
             Assert.AreEqual(expectedAttachment.User, actualAttachment.User);
         }
 
-        private AuditingDbContext CreateDbContext(DbConnection connection)
+        private SqlConnection CreateDbContext(DbConnection connection)
         {
-            return new AuditingDbContext(connection, new DateTimeProvider());
+            return new SqlConnection(connection, new DateTimeProvider());
         }
 
-        private AuditRepository CreateRepository(AuditingDbContext writeDbContext)
+        private AuditRepository CreateRepository(SqlConnection writeDbContext)
         {
             return new AuditRepository(writeDbContext);
         }

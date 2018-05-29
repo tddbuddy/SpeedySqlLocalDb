@@ -5,9 +5,9 @@ namespace TddBuddy.SpeedyLocalDb.EF.Example.Audit
 {
     public class AuditRepository
     {
-        private readonly AuditingDbContext _dbContext;
+        private readonly SqlConnection _dbContext;
 
-        public AuditRepository(AuditingDbContext dbContext)
+        public AuditRepository(SqlConnection dbContext)
         {
             _dbContext = dbContext;
         }

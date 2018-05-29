@@ -3,7 +3,7 @@ using TddBuddy.SpeedyLocalDb.EF.Example.Audit.Context;
 
 namespace TddBuddy.SpeedyLocalDb.EF.Example.Audit.Migrations
 {
-    internal sealed class Configuration : DbMigrationsConfiguration<AuditingDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<SqlConnection>
     {
         public Configuration()
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Common;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Text;
@@ -9,19 +10,24 @@ using TddBuddy.SpeedySqlLocalDb.MigrationRunner;
 namespace TddBuddy.SpeedySqlLocalDb.Attribute
 {
     public sealed class SharedSpeedyLocalDb : System.Attribute, IDisposable, ITestAction
-    {        
+    {
         private readonly ContextVariables _contextVariables;
 
-        public SharedSpeedyLocalDb(Type dbContextType) : this(dbContextType, EntityFrameworkMigrationRunner.NullTypeArgs){}
+        public SharedSpeedyLocalDb(Type dbContextType) : this(dbContextType, EntityFrameworkMigrationRunner.NullTypeArgs) { }
 
-        public SharedSpeedyLocalDb(Type dbContextType, params Type[] dbContextTypeArgs) :this()
+        public SharedSpeedyLocalDb(Type dbContextType, params Type[] dbContextTypeArgs) : this()
         {
-            if (!dbContextType.IsSubclassOf(typeof(DbContext)))
+            var isEntityFrameworkContext = dbContextType.IsSubclassOf(typeof(DbContext));
+            var isDbConnection = dbContextType.IsAssignableFrom(typeof(DbConnection));
+            if (!isEntityFrameworkContext && !isDbConnection)
             {
-                throw new Exception($"{nameof(dbContextType)} must be a subclass of DbContext");
+                throw new Exception($"{nameof(dbContextType)} must be a subclass of DbContext or DbConnection");
             }
 
-            RunEntityFrameworkMigrations(dbContextType, dbContextTypeArgs);   
+            if (isEntityFrameworkContext)
+            {
+                RunEntityFrameworkMigrations(dbContextType, dbContextTypeArgs);
+            }
         }
 
         public SharedSpeedyLocalDb()
