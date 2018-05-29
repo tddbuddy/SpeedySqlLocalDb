@@ -6,3 +6,4 @@ source/.vs/SpeedySqlLocalDb/v14/.suo
 **/*.nupkg
 **/.suo
 **/storage.ide
+**/.vs/*
