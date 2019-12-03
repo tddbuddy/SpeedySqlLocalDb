@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddBuddy.SpeedyLocalDb.EF.Example.Attachment", "TddBuddy.SpeedyLocalDb.EF.Example.Attachment\TddBuddy.SpeedyLocalDb.EF.Example.Attachment.csproj", "{4F326C8A-D2A5-4DE1-B292-2D0AB05D6BAA}"
 EndProject
@@ -10,6 +10,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddBuddy.SpeedySqlLocalDb.Tests", "TddBuddy.SpeedySqlLocalDb.Tests\TddBuddy.SpeedySqlLocalDb.Tests.csproj", "{51AEE238-271C-4CB4-8493-450F40E82B20}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddBuddy.SpeedyLocalDb.EF.Example.Audit", "TddBuddy.SpeedyLocalDb.EF.Example.Audit\TddBuddy.SpeedyLocalDb.EF.Example.Audit.csproj", "{41CD7721-976B-44AD-8BC2-80FF3FD9E31D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddBuddy.SpeedyLocalDb.DotNetCore", "TddBuddy.SpeedyLocalDb.DotNetCore\TddBuddy.SpeedyLocalDb.DotNetCore.csproj", "{5A6C2B0C-C556-49BE-9E6D-E9E933860046}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddBuddy.SpeedySqlLocalDb.DotNetCore.Tests", "TddBuddy.SpeedySqlLocalDb.DotNetCore.Tests\TddBuddy.SpeedySqlLocalDb.DotNetCore.Tests.csproj", "{EEF7550C-A640-4F60-89C0-D99B2863D347}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddBuddy.SpeedyLocalDb.EF.Example.Attachment.DotNetCore", "TddBuddy.SpeedyLocalDb.EF.Example.Attachment.DotNetCore\TddBuddy.SpeedyLocalDb.EF.Example.Attachment.DotNetCore.csproj", "{07EA7797-D0EA-4C05-AB88-00D27FD54F62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddBuddy.SpeedyLocalDb.EF.Example.Audit.DotNetCore", "TddBuddy.SpeedyLocalDb.EF.Example.Audit.DotNetCore\TddBuddy.SpeedyLocalDb.EF.Example.Audit.DotNetCore.csproj", "{0E1338F7-F081-4DE4-8D47-2BE22B8268D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +41,22 @@ Global
 		{41CD7721-976B-44AD-8BC2-80FF3FD9E31D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41CD7721-976B-44AD-8BC2-80FF3FD9E31D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41CD7721-976B-44AD-8BC2-80FF3FD9E31D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A6C2B0C-C556-49BE-9E6D-E9E933860046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A6C2B0C-C556-49BE-9E6D-E9E933860046}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A6C2B0C-C556-49BE-9E6D-E9E933860046}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A6C2B0C-C556-49BE-9E6D-E9E933860046}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEF7550C-A640-4F60-89C0-D99B2863D347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEF7550C-A640-4F60-89C0-D99B2863D347}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEF7550C-A640-4F60-89C0-D99B2863D347}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEF7550C-A640-4F60-89C0-D99B2863D347}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07EA7797-D0EA-4C05-AB88-00D27FD54F62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07EA7797-D0EA-4C05-AB88-00D27FD54F62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07EA7797-D0EA-4C05-AB88-00D27FD54F62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07EA7797-D0EA-4C05-AB88-00D27FD54F62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E1338F7-F081-4DE4-8D47-2BE22B8268D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E1338F7-F081-4DE4-8D47-2BE22B8268D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E1338F7-F081-4DE4-8D47-2BE22B8268D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E1338F7-F081-4DE4-8D47-2BE22B8268D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

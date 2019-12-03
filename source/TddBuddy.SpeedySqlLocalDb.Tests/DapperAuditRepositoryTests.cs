@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Data.Common;
-using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
 using FluentAssertions;
 using NUnit.Framework;
-using TddBuddy.SpeedyLocalDb.EF.Example.Audit;
-using TddBuddy.SpeedyLocalDb.EF.Example.Audit.Context;
-using TddBuddy.SpeedyLocalDb.EF.Example.Audit.DateTime;
 using TddBuddy.SpeedyLocalDb.EF.Example.Audit.Entities;
 using TddBuddy.SpeedySqlLocalDb.Attribute;
 using TddBuddy.SpeedySqlLocalDb.Construction;
-using SqlConnection = TddBuddy.SpeedyLocalDb.EF.Example.Audit.Context.SqlConnection;
 
 namespace TddBuddy.SpeedySqlLocalDb.Tests
 {
@@ -19,6 +13,7 @@ namespace TddBuddy.SpeedySqlLocalDb.Tests
     public class DapperAuditRepositoryTests
     {
         [Test]
+        [Ignore("wip")]
         public void Create_GivenAuditEntry_ShouldStoreInDatabase()
         {
             //---------------Set up test pack-------------------
@@ -33,7 +28,8 @@ namespace TddBuddy.SpeedySqlLocalDb.Tests
             using (var wrapper = CreateWrapper())
             {
                 var connection = wrapper.Connection;
-                connection.Execute($"INSERT INTO AuditEntry(Id, System, User, LogDetail) VALUES(@Id,@System,@User,@LogDetail)", auditEntry);
+                connection.Execute($"INSERT INTO AuditEntry(Id, System, [User], LogDetail) VALUES" +
+                                   $"({auditEntry.Id},{auditEntry.System},{auditEntry.User},{auditEntry.LogDetail})");
                 //---------------Execute Test ----------------------
                 var actual = connection.Query<AuditEntry>("SELECT * from AuditEntry")
                                        .FirstOrDefault();

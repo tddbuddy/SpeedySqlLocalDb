@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Data.Common;
+using System.Data.SqlClient;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
-using TddBuddy.SpeedyLocalDb.EF.Example.Audit;
-using TddBuddy.SpeedyLocalDb.EF.Example.Audit.Context;
-using TddBuddy.SpeedyLocalDb.EF.Example.Audit.DateTime;
-using TddBuddy.SpeedyLocalDb.EF.Example.Audit.Entities;
-using TddBuddy.SpeedySqlLocalDb.Attribute;
-using TddBuddy.SpeedySqlLocalDb.Construction;
+using TddBuddy.SpeedyLocalDb.DotNetCore;
+using TddBuddy.SpeedyLocalDb.DotNetCore.Attribute;
+using TddBuddy.SpeedyLocalDb.DotNetCore.Construction;
+using TddBuddy.SpeedyLocalDb.EF.Example.Audit.DotNetCore;
+using TddBuddy.SpeedyLocalDb.EF.Example.Audit.DotNetCore.Context;
+using TddBuddy.SpeedyLocalDb.EF.Example.Audit.DotNetCore.DateTime;
+using TddBuddy.SpeedyLocalDb.EF.Example.Audit.DotNetCore.Entities;
 
-namespace TddBuddy.SpeedySqlLocalDb.Tests
+namespace TddBuddy.SpeedySqlLocalDb.DotNetCore.Tests
 {
     [TestFixture, SharedSpeedyLocalDb(typeof(AuditDbContext), typeof(DateTimeProvider))]
     public class AuditRepositoryTests
@@ -28,15 +31,14 @@ namespace TddBuddy.SpeedySqlLocalDb.Tests
 
             using (var wrapper = CreateWrapper())
             {
-                var repositoryDbContext = CreateDbContext(wrapper.Connection);
-                var assertDbContext = CreateDbContext(wrapper.Connection);
-                var auditingRepository = CreateRepository(repositoryDbContext);
+                var dbContext = CreateDbContext(wrapper.Connection);
+                var auditingRepository = CreateRepository(dbContext);
                 //---------------Execute Test ----------------------
                 auditingRepository.Create(entry);
                 auditingRepository.Save();
                 //---------------Test Result -----------------------
-                Assert.AreEqual(1, assertDbContext.AuditEntries.Count());
-                var actualEntry = assertDbContext.AuditEntries.First();
+                Assert.AreEqual(1, dbContext.AuditEntries.Count());
+                var actualEntry = dbContext.AuditEntries.First();
                 AssertIsEqual(entry, actualEntry);
             }
         }
@@ -57,8 +59,16 @@ namespace TddBuddy.SpeedySqlLocalDb.Tests
 
         private AuditDbContext CreateDbContext(DbConnection connection)
         {
-            return new AuditDbContext(connection, new DateTimeProvider());
+            var connectionString = connection.ConnectionString;
+
+            var builder = new DbContextOptionsBuilder<AuditDbContext>();
+            builder
+                .UseSqlServer(connectionString)
+                .EnableSensitiveDataLogging(true);
+
+            return new AuditDbContext(builder.Options, new DateTimeProvider());
         }
+
 
         private AuditRepository CreateRepository(AuditDbContext writeDbContext)
         {

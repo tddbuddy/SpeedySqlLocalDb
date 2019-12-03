@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Data.Common;
 using NUnit.Framework;
-using TddBuddy.SpeedyLocalDb.EF.Example.Attachment.Context;
-using TddBuddy.SpeedySqlLocalDb.Attribute;
+using TddBuddy.SpeedyLocalDb.DotNetCore.Attribute;
+using TddBuddy.SpeedyLocalDb.EF.Example.Attachment.DotNetCore.Context;
 
-namespace TddBuddy.SpeedySqlLocalDb.Tests
+namespace TddBuddy.SpeedySqlLocalDb.DotNetCore.Tests
 {
     [TestFixture]
     public class SharedSpeedyLocalDbTests

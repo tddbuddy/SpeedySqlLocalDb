@@ -5,24 +5,24 @@ using TddBuddy.SpeedyLocalDb.EF.Example.Audit.Entities;
 
 namespace TddBuddy.SpeedyLocalDb.EF.Example.Audit.Context
 {
-    public class SqlConnection : DbContext, IDateTimeProvider
+    public class AuditDbContext : DbContext, IDateTimeProvider
     {
         private readonly IDateTimeProvider _dateTimeProvider;
 
         public System.DateTime Now => _dateTimeProvider.Now;
 
-        public SqlConnection() : this(new DateTimeProvider())
+        public AuditDbContext() : this(new DateTimeProvider())
         {
-            Database.SetInitializer<SqlConnection>(null);
+            Database.SetInitializer<AuditDbContext>(null);
         }
 
-        public SqlConnection(IDateTimeProvider dateTimeProvider) : base("AuditingContext")
+        public AuditDbContext(IDateTimeProvider dateTimeProvider) : base("AuditingContext")
         {
             _dateTimeProvider = dateTimeProvider;
-            Database.SetInitializer<SqlConnection>(null);
+            Database.SetInitializer<AuditDbContext>(null);
         }
 
-        public SqlConnection(DbConnection connection, IDateTimeProvider dateTimeProvider) : base(connection, false)
+        public AuditDbContext(DbConnection connection, IDateTimeProvider dateTimeProvider) : base(connection, false)
         {
             _dateTimeProvider = dateTimeProvider;
             //Database.SetInitializer<AuditingDbContext>(null);
