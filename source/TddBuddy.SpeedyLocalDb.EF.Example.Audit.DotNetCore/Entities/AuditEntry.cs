@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TddBuddy.SpeedyLocalDb.EF.Example.Audit.DotNetCore.Entities
 {
+    [Table("Entries", Schema = "aud")]
     public class AuditEntry
     {
         [Key]
