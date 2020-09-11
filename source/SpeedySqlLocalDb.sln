@@ -11,13 +11,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddBuddy.SpeedySqlLocalDb.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddBuddy.SpeedyLocalDb.EF.Example.Audit", "TddBuddy.SpeedyLocalDb.EF.Example.Audit\TddBuddy.SpeedyLocalDb.EF.Example.Audit.csproj", "{41CD7721-976B-44AD-8BC2-80FF3FD9E31D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddBuddy.SpeedyLocalDb.DotNetCore", "TddBuddy.SpeedyLocalDb.DotNetCore\TddBuddy.SpeedyLocalDb.DotNetCore.csproj", "{5A6C2B0C-C556-49BE-9E6D-E9E933860046}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TddBuddy.SpeedyLocalDb.DotNetCore", "TddBuddy.SpeedyLocalDb.DotNetCore\TddBuddy.SpeedyLocalDb.DotNetCore.csproj", "{5A6C2B0C-C556-49BE-9E6D-E9E933860046}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddBuddy.SpeedySqlLocalDb.DotNetCore.Tests", "TddBuddy.SpeedySqlLocalDb.DotNetCore.Tests\TddBuddy.SpeedySqlLocalDb.DotNetCore.Tests.csproj", "{EEF7550C-A640-4F60-89C0-D99B2863D347}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TddBuddy.SpeedySqlLocalDb.DotNetCore.Tests", "TddBuddy.SpeedySqlLocalDb.DotNetCore.Tests\TddBuddy.SpeedySqlLocalDb.DotNetCore.Tests.csproj", "{EEF7550C-A640-4F60-89C0-D99B2863D347}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddBuddy.SpeedyLocalDb.EF.Example.Attachment.DotNetCore", "TddBuddy.SpeedyLocalDb.EF.Example.Attachment.DotNetCore\TddBuddy.SpeedyLocalDb.EF.Example.Attachment.DotNetCore.csproj", "{07EA7797-D0EA-4C05-AB88-00D27FD54F62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TddBuddy.SpeedyLocalDb.EF.Example.Attachment.DotNetCore", "TddBuddy.SpeedyLocalDb.EF.Example.Attachment.DotNetCore\TddBuddy.SpeedyLocalDb.EF.Example.Attachment.DotNetCore.csproj", "{07EA7797-D0EA-4C05-AB88-00D27FD54F62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddBuddy.SpeedyLocalDb.EF.Example.Audit.DotNetCore", "TddBuddy.SpeedyLocalDb.EF.Example.Audit.DotNetCore\TddBuddy.SpeedyLocalDb.EF.Example.Audit.DotNetCore.csproj", "{0E1338F7-F081-4DE4-8D47-2BE22B8268D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TddBuddy.SpeedyLocalDb.EF.Example.Audit.DotNetCore", "TddBuddy.SpeedyLocalDb.EF.Example.Audit.DotNetCore\TddBuddy.SpeedyLocalDb.EF.Example.Audit.DotNetCore.csproj", "{0E1338F7-F081-4DE4-8D47-2BE22B8268D6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetCore", "DotNetCore", "{9A147E2B-73A6-400F-A0C3-DA94D837DC20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,6 +62,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5A6C2B0C-C556-49BE-9E6D-E9E933860046} = {9A147E2B-73A6-400F-A0C3-DA94D837DC20}
+		{EEF7550C-A640-4F60-89C0-D99B2863D347} = {9A147E2B-73A6-400F-A0C3-DA94D837DC20}
+		{07EA7797-D0EA-4C05-AB88-00D27FD54F62} = {9A147E2B-73A6-400F-A0C3-DA94D837DC20}
+		{0E1338F7-F081-4DE4-8D47-2BE22B8268D6} = {9A147E2B-73A6-400F-A0C3-DA94D837DC20}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7B426CEB-6ACD-46E3-8110-6412103186F4}
