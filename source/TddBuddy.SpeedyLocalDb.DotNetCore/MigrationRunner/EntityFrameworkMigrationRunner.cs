@@ -28,7 +28,6 @@ namespace TddBuddy.SpeedyLocalDb.DotNetCore.MigrationRunner
             }
         }
 
-
         private DbContext CreateDbContext(string connectionString, Type dbContextType, Type[] dbContextTypeArgs)
         {
             var builder = new DbContextOptionsBuilder();

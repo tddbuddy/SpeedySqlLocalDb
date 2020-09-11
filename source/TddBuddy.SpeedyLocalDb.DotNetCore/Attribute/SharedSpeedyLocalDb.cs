@@ -126,6 +126,7 @@ namespace TddBuddy.SpeedyLocalDb.DotNetCore.Attribute
         public void BeforeTest(ITest test)
         {
             // do nothing
+            // todo: try and create an instance of the Db Context
         }
 
         public void AfterTest(ITest test)

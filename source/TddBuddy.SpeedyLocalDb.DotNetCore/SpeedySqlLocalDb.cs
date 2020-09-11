@@ -47,6 +47,17 @@ namespace TddBuddy.SpeedyLocalDb.DotNetCore
             var scopeTimeout = new TimeSpan(0, 0, _contextVariables.TransactionTimeoutMinutes, 0);
             var transactionScope = new TransactionScope(TransactionScopeOption.Required, scopeTimeout);
 
+            // todo : check for tables and throw error if none-present
+            connection.Open();
+            var tables = connection.GetSchema("Tables");
+            if(tables.Rows.Count == 0)
+            {
+                throw new InvalidDbContextException("It would appear you are using a constructor on for your DBContext that expects a generic. " +
+                                                    "E.g public WebAppDbContext(DbContextOptions<WebAppDbContext> options). " +
+                                                    "You need to remove the generic to use this framework. E.g public WebAppDbContext(DbContextOptions options)");
+            }
+            connection.Close();
+
             return new SpeedySqlLocalDbWrapper(connection, transactionScope);
         }
 
